@@ -11,7 +11,7 @@ import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authenticati
 import { path } from '../utils'
 
 import Home from '../routes/Home';
-import Login from '../routes/Login';
+import Login from './Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
 
@@ -41,7 +41,8 @@ class App extends Component {
     render() {
         return (
             <Fragment>
-                <Router history={history}>
+                <Login />
+                {/* <Router history={history}>
                     <div className="main-container">
                         <ConfirmModal />
                         {this.props.isLoggedIn && <Header />}
@@ -61,7 +62,7 @@ class App extends Component {
                             closeButton={<CustomToastCloseButton />}
                         />
                     </div>
-                </Router>
+                </Router> */}
             </Fragment>
         )
     }
