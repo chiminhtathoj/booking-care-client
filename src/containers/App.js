@@ -41,8 +41,7 @@ class App extends Component {
     render() {
         return (
             <Fragment>
-                <Login />
-                {/* <Router history={history}>
+                <Router history={history}>
                     <div className="main-container">
                         <ConfirmModal />
                         {this.props.isLoggedIn && <Header />}
@@ -62,7 +61,7 @@ class App extends Component {
                             closeButton={<CustomToastCloseButton />}
                         />
                     </div>
-                </Router> */}
+                </Router>
             </Fragment>
         )
     }
@@ -71,7 +70,7 @@ class App extends Component {
 const mapStateToProps = state => {
     return {
         started: state.app.started,
-        isLoggedIn: state.admin.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn
     };
 };
 
