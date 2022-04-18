@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
 
 import { path } from '../utils'
+import "./App.scss"
 
 import Home from '../routes/Home';
 import Login from './Auth/Login';
