@@ -5,8 +5,10 @@ import { push } from "connected-react-router";
 import * as actions from "../../store/actions";
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
+import { handleLoginAPI } from "../../services/userService";
 
-function Login() {
+function Login(props) {
+    const [errorMessage, setErrorMessage] = useState("")
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const handleUsername = (e) => {
@@ -15,8 +17,22 @@ function Login() {
     const handlePassword = (e) => {
         setPassword(e.target.value)
     }
-    const handleOnClick = () => {
-        console.log("username: ", username, "password: ", password)
+    const handleLogin = async () => {
+        setErrorMessage("")
+        try {
+            const data = await handleLoginAPI(username, password)
+            if (data && data.errCode !== 0) {
+                setErrorMessage(data.message)
+            }
+            if (data && data.errCode === 0) {
+                props.userLoginSuccess(data.user)
+            }
+        } catch (error) {
+            console.log(error)
+            if (error.response.data) {
+                setErrorMessage(error.response.data.message)
+            }
+        }
     }
     return (
         <div className="login-background">
@@ -45,6 +61,9 @@ function Login() {
                     <div className="col-12 login-forgot-text">
                         Forgot your password ?
                     </div>
+                    <div className="col-12 login-forgot-text" style={{ color: "#ff0000fa" }} >
+                        {errorMessage}
+                    </div>
                     <div className="col-9 login-signup-text">
                         <span>No account ?</span>
                         <a href="#"> Signup</a>
@@ -52,7 +71,7 @@ function Login() {
                     <div className="col-3">
                         <button
                             className="btn-login"
-                            onClick={handleOnClick}
+                            onClick={() => handleLogin()}
                         >
                             Login
                         </button>
@@ -120,11 +139,12 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        // adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
+        // adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo))
     };
 };
 
