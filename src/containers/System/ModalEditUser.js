@@ -1,32 +1,29 @@
 import { Button, Modal } from 'react-bootstrap';
 import React, { Component, useState, useEffect } from 'react';
-import { emitter } from "../../utils/emitter"
-import "./ModalUser.scss"
-function ModalUser(props) {
+import "./ModalUser"
+function ModalEditUser(props) {
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [address, setAddress] = useState("")
+    const [id, setId] = useState()
+
+    useEffect(() => {
+        setEmail(props.userEdit.email)
+        setFirstName(props.userEdit.firstName)
+        setLastName(props.userEdit.lastName)
+        setAddress(props.userEdit.address)
+        setId(props.userEdit.id)
+    }, [])
+
+
     const handleOnChangeInput = (e, setState) => {
         setState(e.target.value)
     }
 
-    const listenEmitter = () => {
-        emitter.on("EVENT_CLEAR_MODAL_DATA", () => {
-            //reset state after input
-            setEmail("")
-            setPassword("")
-            setFirstName("")
-            setLastName("")
-            setAddress("")
-
-        })
-    }
-
     const validateInput = () => {
         let isValidate = true;
-        const objInput = { email, password, firstName, lastName, address }
+        const objInput = { email, firstName, lastName, address }
         for (const key in objInput) {
             if (Object.hasOwnProperty.call(objInput, key)) {
                 if (!objInput[key]) {
@@ -38,17 +35,11 @@ function ModalUser(props) {
         }
         return isValidate
     }
-
-    const handleOnClickAdd = () => {
+    const handleOnClickEdit = () => {
         if (validateInput()) {
-            props.createNewUser({ email, password, firstName, lastName, address })
+            props.handleEditUser({ id, email, firstName, lastName, address })
         }
     }
-
-    useEffect(() => {
-        listenEmitter()
-        return () => emitter.removeListener("EVENT_CLEAR_MODAL_DATA", listenEmitter)
-    }, [])
     return (
         <>
             <Modal
@@ -68,14 +59,15 @@ function ModalUser(props) {
                                 type="text"
                                 onChange={(e) => handleOnChangeInput(e, setEmail)}
                                 value={email}
+                                disabled
                             />
                         </div>
                         <div className="input-container">
-                            <label htmlFor="">Password</label>
+                            <label htmlFor="">Address</label>
                             <input
                                 type="text"
-                                onChange={(e) => handleOnChangeInput(e, setPassword)}
-                                value={password}
+                                onChange={(e) => handleOnChangeInput(e, setAddress)}
+                                value={address}
                             />
                         </div>
                     </div>
@@ -98,20 +90,10 @@ function ModalUser(props) {
                             />
                         </div>
                     </div>
-                    <div className="modal-user-body">
-                        <div className="input-container">
-                            <label htmlFor="">Address</label>
-                            <input
-                                type="text"
-                                onChange={(e) => handleOnChangeInput(e, setAddress)}
-                                value={address}
-                            />
-                        </div>
-                    </div>
 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" className='px-3' onClick={handleOnClickAdd}>
+                    <Button variant="primary" className='px-3' onClick={handleOnClickEdit}>
                         Save Changes
                     </Button>
                     <Button variant="secondary" className='px-3' onClick={props.handleClose}>
@@ -123,4 +105,4 @@ function ModalUser(props) {
         </>
     );
 }
-export default ModalUser
+export default ModalEditUser
