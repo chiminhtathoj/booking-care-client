@@ -1,4 +1,27 @@
 {
+    "home-header": {
+        "special": "Medical specialty",
+        "search-doctor": "Find a doctor by specialty",
+        "health-facility": "Health facilities",
+        "select-room": "Choose Consulting room",
+        "doctor": "Doctor",
+        "select-doctor": "choose a good doctor",
+        "examination-package": "Packages",
+        "health-check": "General health check",
+        "support": "Support"
+    },
+    "banner": {
+        "title-first": "Medical background",
+        "title-second": "Comprehensive health care",
+        "examination-specialized": "Specialized examination",
+        "examination-remote": "Remote examination",
+        "general-check": "General examination",
+        "medical-test": "Medical test",
+        "mental-health": "Mental health",
+        "dental-examination": "Dental examination",
+        "surgery-package": "Surgery pack",
+        "medical-products": "Medical products"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
