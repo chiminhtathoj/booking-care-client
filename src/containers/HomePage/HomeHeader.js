@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { connect } from 'react-redux';
+import { FormattedMessage } from "react-intl";
 import "./HomeHeader.scss"
 import logo from "../../assets/logo.svg"
+import { LANGUAGES } from "../../utils/constant"
+import { changeLanguageApp } from "../../store/actions"
 
 
-function HomeHeader() {
+function HomeHeader(props) {
+    const handleLanguage = (language) => {
+        props.changeLanguageAppReducer(language)
+    }
+    const language = props.language
     return (
         <>
             <div className="home-header-container">
@@ -15,34 +22,36 @@ function HomeHeader() {
                         <img src={logo} alt="logo" className="header-logo" />
                     </div>
                     <div className="header-content-center">
-                        <div className="child-content-center"><b>Chuyên khoa</b>
-                            <div className="subs-title">Tìm bác sĩ theo chuyên khoa</div>
+                        <div className="child-content-center"><b><FormattedMessage id="home-header.special" /></b>
+                            <div className="subs-title"><FormattedMessage id="home-header.search-doctor" /></div>
                         </div>
-                        <div className="child-content-center"><b>Cơ sở y tế</b>
-                            <div className="subs-title">Chọn bệnh viện phòng khám</div>
+                        <div className="child-content-center"><b><FormattedMessage id="home-header.health-facility" /></b>
+                            <div className="subs-title"><FormattedMessage id="home-header.select-room" /></div>
                         </div>
-                        <div className="child-content-center"><b>Bác sĩ</b>
-                            <div className="subs-title">Chọn bác sĩ giỏi</div>
+                        <div className="child-content-center"><b><FormattedMessage id="home-header.doctor" /></b>
+                            <div className="subs-title"><FormattedMessage id="home-header.select-doctor" /></div>
                         </div>
-                        <div className="child-content-center"><b>Gói khám</b>
-                            <div className="subs-title">Khám sức khỏe tổng quát</div>
+                        <div className="child-content-center"><b><FormattedMessage id="home-header.examination-package" /></b>
+                            <div className="subs-title"><FormattedMessage id="home-header.health-check" /></div>
                         </div>
 
                     </div>
                     <div className="header-content-right">
-                        <div className="header-support"> <i className="fa-solid fa-circle-question"></i>Hỗ trợ</div>
-                        <div className="language-vi">VN</div>
-                        <div className="language-en">EN</div>
+                        <div className="header-support"> <i className="fa-solid fa-circle-question"></i>
+                            <FormattedMessage id="home-header.support" />
+                        </div>
+                        <div className={language === LANGUAGES.VI ? "language-vi active" : "language-vi "}> <span onClick={() => handleLanguage(LANGUAGES.VI)}>VN</span> </div>
+                        <div className={language === LANGUAGES.EN ? "language-en active" : "language-en "}><span onClick={() => handleLanguage(LANGUAGES.EN)}>EN</span> </div>
                     </div>
                 </div>
 
                 <div className="home-header-banner">
                     <div className="banner-top">
                         <div className="title-first">
-                            NỀN TẢNG Y TẾ
+                            <FormattedMessage id="banner.title-first" />
                         </div>
                         <div className="title-second">
-                            CHĂM SÓC SỨC KHỎE TOÀN DIỆN
+                            <FormattedMessage id="banner.title-second" />
                         </div>
                         <div className="search">
                             <i className="fa-solid fa-magnifying-glass"></i>
@@ -53,41 +62,41 @@ function HomeHeader() {
                         <div className="options">
                             <div className="option-child">
                                 <div className="icon-child"><i className="fa-solid fa-hospital"></i></div>
-                                <div className="text-child">Khám chuyên khoa</div>
+                                <div className="text-child"><FormattedMessage id="banner.examination-specialized" /></div>
                             </div>
                             <div className="option-child">
                                 <div className="icon-child"><i class="fa-solid fa-mobile"></i></div>
-                                <div className="text-child">Khám từ xa</div>
+                                <div className="text-child"><FormattedMessage id="banner.examination-remote" /></div>
                             </div>
 
                             <div className="option-child">
                                 <div className="icon-child"><i class="fa-solid fa-stethoscope"></i></div>
-                                <div className="text-child">Khám tổng quát</div>
+                                <div className="text-child"><FormattedMessage id="banner.general-check" /></div>
                             </div>
 
                             <div className="option-child">
                                 <div className="icon-child"><i class="fa-solid fa-microscope"></i></div>
-                                <div className="text-child">Xét nghiệm y học</div>
+                                <div className="text-child"><FormattedMessage id="banner.medical-test" />c</div>
                             </div>
 
                             <div className="option-child">
                                 <div className="icon-child"><i class="fa-solid fa-user-doctor"></i></div>
-                                <div className="text-child">Sức khỏe tinh thần</div>
+                                <div className="text-child"><FormattedMessage id="banner.mental-health" /></div>
                             </div>
 
                             <div className="option-child">
                                 <div className="icon-child"><i class="fa-solid fa-tooth"></i></div>
-                                <div className="text-child">Khám nha khoa</div>
+                                <div className="text-child"><FormattedMessage id="banner.dental-examination" /></div>
                             </div>
 
                             <div className="option-child">
                                 <div className="icon-child"><i class="fa-solid fa-book-medical"></i></div>
-                                <div className="text-child">Gói phẫu thuật</div>
+                                <div className="text-child"><FormattedMessage id="banner.surgery-package" /></div>
                             </div>
 
                             <div className="option-child">
                                 <div className="icon-child"><i class="fa-solid fa-truck-medical"></i></div>
-                                <div className="text-child">Sản phẩm y tế</div>
+                                <div className="text-child"><FormattedMessage id="banner.medical-products" /></div>
                             </div>
                         </div>
                     </div>
@@ -99,15 +108,18 @@ function HomeHeader() {
     )
 }
 
+
 const mapStateToProps = state => {
     return {
         started: state.app.started,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageAppReducer: (language) => dispatch(changeLanguageApp(language))
     };
 };
 
