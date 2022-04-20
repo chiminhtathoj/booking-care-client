@@ -2,14 +2,34 @@ import { useState } from "react";
 import { connect } from 'react-redux';
 import HomeHeader from "./HomeHeader";
 import Specialty from "./Section/Specialty";
+import MedicalFacility from "./Section/MedicalFacility";
+import OutstandingDoctor from "./Section/OutstandingDoctor";
+import Handbook from "./Section/Handbook";
+import About from "./Section/About";
+import HomeFooter from "./HomeFooter";
 import "./HomePage.scss"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 
 function HomePage() {
+    const settings = {
+        dots: false,
+        infinite: true,
+        speed: 200,
+        slidesToShow: 4,
+        slidesToScroll: 1
+    };
     return (
         <>
             <HomeHeader />
-            <Specialty />
+            <Specialty settings={settings} />
+            <MedicalFacility settings={settings} />
+            <OutstandingDoctor settings={settings} />
+            <Handbook settings={settings} />
+            <About />
+            <HomeFooter />
         </>
     )
 }
