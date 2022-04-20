@@ -9,7 +9,6 @@ function HomeFooter(props) {
             <div className="home-footer-content">
                 <div className="footer-content-left">
                     &copy; Chiminhtathoj
-
                 </div>
                 <div className="footer-content-right">
                     <a target="_blank" href="https://facebook.com/chiminhtathoj" alt="facebook">

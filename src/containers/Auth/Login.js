@@ -43,6 +43,7 @@ function Login(props) {
                         <label htmlFor="">Username</label>
                         <input type="text"
                             className="form-control"
+                            tabIndex="1"
                             placeholder='Enter Your Username'
                             value={username}
                             onChange={(e) => handleUsername(e)}
@@ -53,6 +54,7 @@ function Login(props) {
                         <input
                             type="password"
                             className="form-control "
+                            tabIndex="2"
                             placeholder='Enter Your Password'
                             value={password}
                             onChange={(e) => handlePassword(e)}
@@ -66,11 +68,12 @@ function Login(props) {
                     </div>
                     <div className="col-9 login-signup-text">
                         <span>No account ?</span>
-                        <a href="#"> Signup</a>
+                        <a href="#" tabIndex="4"> Signup</a>
                     </div>
                     <div className="col-3">
                         <button
                             className="btn-login"
+                            tabIndex="5"
                             onClick={() => handleLogin()}
                         >
                             Login

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { ConnectedRouter as Router } from 'connected-react-router';
@@ -20,10 +20,10 @@ import CustomScrollbars from "../components/CustomScrollbars"
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 
-class App extends Component {
 
-    handlePersistorState = () => {
-        const { persistor } = this.props;
+function App(props) {
+    const handlePersistorState = () => {
+        const { persistor } = props;
         let { bootstrapped } = persistor.getState();
         if (bootstrapped) {
             if (this.props.onBeforeLift) {
@@ -35,41 +35,88 @@ class App extends Component {
             }
         }
     };
+    useEffect(() => {
+        handlePersistorState()
+    }, [])
+    return (
+        <Fragment>
+            <Router history={history}>
+                <div className="main-container">
 
-    componentDidMount() {
-        this.handlePersistorState();
-    }
 
-    render() {
-        return (
-            <Fragment>
-                <Router history={history}>
-                    <div className="main-container">
-                        {this.props.isLoggedIn && <Header />}
-
-                        <div className="content-container">
-                            <Switch>
-                                <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
-                                    <Route path={path.HOME} exact component={(Home)} />
-                                    <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                    <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                    <Route path={path.HOMEPAGE} component={HomePage} />
-                                </CustomScrollbars>
-                            </Switch>
-                        </div>
-
-                        <ToastContainer
-                            className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
-                            autoClose={false} hideProgressBar={true} pauseOnHover={false}
-                            pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
-                            closeButton={<CustomToastCloseButton />}
-                        />
+                    <div className="content-container">
+                        <Switch>
+                            <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
+                                <Route path={path.HOME} exact component={(Home)} />
+                                <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                <Route path={path.HOMEPAGE} component={HomePage} />
+                            </CustomScrollbars>
+                        </Switch>
                     </div>
-                </Router>
-            </Fragment>
-        )
-    }
+
+                    <ToastContainer
+                        className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
+                        autoClose={false} hideProgressBar={true} pauseOnHover={false}
+                        pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
+                        closeButton={<CustomToastCloseButton />}
+                    />
+                </div>
+            </Router>
+        </Fragment>
+    )
+
 }
+// class App extends Component {
+
+//     handlePersistorState = () => {
+//         const { persistor } = this.props;
+//         let { bootstrapped } = persistor.getState();
+//         if (bootstrapped) {
+//             if (this.props.onBeforeLift) {
+//                 Promise.resolve(this.props.onBeforeLift())
+//                     .then(() => this.setState({ bootstrapped: true }))
+//                     .catch(() => this.setState({ bootstrapped: true }));
+//             } else {
+//                 this.setState({ bootstrapped: true });
+//             }
+//         }
+//     };
+
+//     componentDidMount() {
+//         this.handlePersistorState();
+//     }
+
+//     render() {
+//         return (
+//             <Fragment>
+//                 <Router history={history}>
+//                     <div className="main-container">
+//                         {this.props.isLoggedIn && <Header />}
+
+//                         <div className="content-container">
+//                             <Switch>
+//                                 <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
+//                                     <Route path={path.HOME} exact component={(Home)} />
+//                                     <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+//                                     <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+//                                     <Route path={path.HOMEPAGE} component={HomePage} />
+//                                 </CustomScrollbars>
+//                             </Switch>
+//                         </div>
+
+//                         <ToastContainer
+//                             className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
+//                             autoClose={false} hideProgressBar={true} pauseOnHover={false}
+//                             pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
+//                             closeButton={<CustomToastCloseButton />}
+//                         />
+//                     </div>
+//                 </Router>
+//             </Fragment>
+//         )
+//     }
+// }
 
 const mapStateToProps = state => {
     return {
