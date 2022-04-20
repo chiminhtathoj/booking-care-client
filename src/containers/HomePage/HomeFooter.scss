@@ -1,16 +1,18 @@
 .home-footer-container {
-    height: 80px;
+    height: 100px;
     background-color: #64b9e5;
     .home-footer-content {
         color: white;
         display: flex;
         justify-content: space-between;
-        padding: 0 380px;
         align-items: center;
-        height: 100%;
+        padding: 7px 380px;
         .footer-content-left {
         }
         .footer-content-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             a {
                 i.customize-facebook {
                     color: #0175f3;
