@@ -1,0 +1,26 @@
+.home-footer-container {
+    height: 80px;
+    background-color: #64b9e5;
+    .home-footer-content {
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 380px;
+        align-items: center;
+        height: 100%;
+        .footer-content-left {
+        }
+        .footer-content-right {
+            a {
+                i.customize-facebook {
+                    color: #0175f3;
+                }
+                i.customize-youtube {
+                    color: #c70000;
+                }
+                margin-right: 10px;
+                font-size: 32px;
+            }
+        }
+    }
+}

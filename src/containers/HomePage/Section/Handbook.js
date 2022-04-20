@@ -5,7 +5,7 @@ import Slider from "react-slick";
 function Specialty(props) {
 
     return (
-        <div className="section-share section-specialty">
+        <div className="section-share section-handbook">
             <div className="section-container">
                 <div className="section-header">
                     <span className="title-section">Chuyên khoa phổ biến</span>
@@ -13,28 +13,30 @@ function Specialty(props) {
                 </div>
                 <div className="section-body">
                     <Slider {...props.settings}>
+                        <div className="section-customize ">
+
+                            <div className="section-img section-handbook" />
+                            <div>Cơ xương khớp</div>
+
+                        </div>
                         <div className="section-customize">
-                            <div className="section-img section-specialty" />
+                            <div className="section-img section-handbook" />
                             <div>Cơ xương khớp</div>
                         </div>
                         <div className="section-customize">
-                            <div className="section-img section-specialty" />
+                            <div className="section-img section-handbook" />
                             <div>Cơ xương khớp</div>
                         </div>
                         <div className="section-customize">
-                            <div className="section-img section-specialty" />
+                            <div className="section-img section-handbook" />
                             <div>Cơ xương khớp</div>
                         </div>
                         <div className="section-customize">
-                            <div className="section-img section-specialty" />
+                            <div className="section-img section-handbook" />
                             <div>Cơ xương khớp</div>
                         </div>
                         <div className="section-customize">
-                            <div className="section-img section-specialty" />
-                            <div>Cơ xương khớp</div>
-                        </div>
-                        <div className="section-customize">
-                            <div className="section-img section-specialty" />
+                            <div className="section-img section-handbook" />
                             <div>Cơ xương khớp</div>
                         </div>
                     </Slider>
