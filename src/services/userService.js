@@ -28,10 +28,18 @@ const editUserAPI = (userData) => {
     return axios.patch("/api/edit-user", userData)
 }
 
+const getAllCodeAPI = (type) => {
+    return axios.get("/api/get-allcode", {
+        params: {
+            type: type
+        }
+    })
+}
 export {
     handleLoginAPI,
     getUsersAPI,
     createNewUserAPI,
     deleteUserAPI,
-    editUserAPI
+    editUserAPI,
+    getAllCodeAPI
 }
