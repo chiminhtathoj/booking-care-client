@@ -73,6 +73,12 @@
                     font-weight: 500;
                     color: $colormain;
                 }
+                &.active {
+                    a {
+                        color: #49bce2;
+                    }
+                    background-color: #ebebeb;
+                }
                 &:hover {
                     background-color: darken($bg-menu-color, 3);
                     .sub-menu-list {
