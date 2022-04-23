@@ -1,0 +1,21 @@
+.preview-img-container {
+    .label-img {
+        background-color: #ddd;
+        padding: 5px;
+        border-radius: 2px;
+        cursor: pointer;
+        &:hover {
+            filter: brightness(80%);
+        }
+    }
+}
+.preview-img {
+    cursor: pointer;
+    border: 1px solid red;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+}
