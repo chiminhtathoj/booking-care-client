@@ -5,6 +5,7 @@ import * as action from "../../../store/actions/adminAction"
 import "./UserRedux.scss"
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
+import TableUserManage from './TableUserManage';
 
 function UserRedux(props) {
 
@@ -14,34 +15,44 @@ function UserRedux(props) {
     const [img, setImg] = useState("")
     const [isOpenImg, setIsOpenImg] = useState(false)
     const [inputs, setInputs] = useState({})
-    //state user
-    // const [user, setUser] = useState("")
-    // const [password, setPassword] = useState("")
-    // const [phone, setPhone] = useState("")
-    // const [firstName, setFirstName] = useState("")
-    // const [lastName, setLastName] = useState("")
-    // const [address, setAddress] = useState("")
-    // const [gender, setGender] = useState("")
-    // const [position, setPosition] = useState("")
-    // const [role, setRole] = useState("")
-    // const [avatar, setAvatar] = useState("")
 
     useEffect(() => {
         props.getGenderStart()
         props.getPositionStart()
         props.getRoleStart()
+
     }, [])
     useEffect(() => {
         setGenders(props.genders)
         setRoles(props.roles)
         setPositions(props.positions)
         if (props.genders && props.genders.length > 0)
-            setInputs({ gender: props.genders[0].key })
+            setInputs(prevState => ({
+                ...prevState,
+                gender: props.genders[0].key
+            }))
         if (props.positions && props.positions.length > 0)
-            setInputs({ position: props.positions[0].key })
+            setInputs(prevState => ({
+                ...prevState,
+                position: props.positions[0].key
+            }))
         if (props.roles && props.roles.length > 0)
-            setInputs({ role: props.roles[0].key })
+            setInputs(prevState => ({
+                ...prevState,
+                role: props.roles[0].key
+            }))
     }, [props.genders, props.positions, props.roles])
+
+    useEffect(() => {
+        const arrInput = ["email", "password", "phoneNumber", "firstName", "lastName", "address", "image"]
+        for (let i = 0; i < arrInput.length; i++) {
+            setInputs(prevState => ({
+                ...prevState,
+                [arrInput[i]]: ""
+            }))
+        }
+    }, [props.users])
+
     const handleOnChangeImg = (e) => {
         const data = e.target.files
         const img = data[0] // lay thang dau tien thoi
@@ -49,6 +60,8 @@ function UserRedux(props) {
             const objectUrl = URL.createObjectURL(img);
             setImg(objectUrl)
         }
+        console.log("onchangeimg", inputs)
+
     }
     const handleOnChangePreview = (e) => {
         if (img) {
@@ -62,20 +75,20 @@ function UserRedux(props) {
         }))
     }
     const checkValidate = () => {
-        let isValid = false;
+        let isValid = true;
         const arrInput = ["email", "password", "phoneNumber", "firstName", "lastName", "address"]
         for (let i = 0; i < arrInput.length; i++) {
             if (!inputs[arrInput[i]]) {
                 alert(arrInput[i] + " must be not empty")
+                isValid = false
                 break;
             }
         }
-        isValid = true
         return isValid
     }
     const handleSaveUser = () => {
         if (checkValidate()) {
-            console.log(inputs)
+            console.log("handlesave", inputs)
             props.createNewUser({
                 email: inputs.email,
                 phoneNumber: inputs.phoneNumber,
@@ -85,7 +98,8 @@ function UserRedux(props) {
                 address: inputs.address,
                 gender: inputs.gender,
                 roleId: inputs.role,
-                positionId: inputs.position
+                positionId: inputs.position,
+                image: inputs.image
             })
         }
     }
@@ -223,9 +237,17 @@ function UserRedux(props) {
 
                             ><FormattedMessage id="manage-user.save" /></button>
                         </div>
+                        <div className="col-12 my-5">
+                            <TableUserManage />
+                        </div>
                     </div>
+
                 </div>
+
             </div>
+
+
+
             {isOpenImg && (
                 <Lightbox
                     mainSrc={img}
@@ -242,6 +264,8 @@ const mapStateToProps = state => {
         genders: state.admin.genders,
         positions: state.admin.positions,
         roles: state.admin.roles,
+        users: state.admin.users
+
     };
 };
 
@@ -250,7 +274,9 @@ const mapDispatchToProps = dispatch => {
         getGenderStart: () => dispatch(action.fetchGenderStart()),
         getPositionStart: () => dispatch(action.fetchPositionStart()),
         getRoleStart: () => dispatch(action.fetchRoleStart()),
-        createNewUser: (data) => dispatch(action.createNewUser(data))
+        createNewUser: (data) => dispatch(action.createNewUser(data)),
+        loadAllUser: () => dispatch(action.loadAllUser()),
+
     };
 };
 

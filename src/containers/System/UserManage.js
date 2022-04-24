@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { getUsersAPI, createNewUserAPI, deleteUserAPI, editUserAPI } from "../../services/userService"
