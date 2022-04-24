@@ -22,6 +22,7 @@ function UserRedux(props) {
         props.getRoleStart()
 
     }, [])
+    // load du lieu tu redux len xong gan vao state,cai dat mat dinh cho select down
     useEffect(() => {
         setGenders(props.genders)
         setRoles(props.roles)
@@ -34,22 +35,33 @@ function UserRedux(props) {
         if (props.positions && props.positions.length > 0)
             setInputs(prevState => ({
                 ...prevState,
-                position: props.positions[0].key
+                positionId: props.positions[0].key
             }))
         if (props.roles && props.roles.length > 0)
             setInputs(prevState => ({
                 ...prevState,
-                role: props.roles[0].key
+                roleId: props.roles[0].key
             }))
     }, [props.genders, props.positions, props.roles])
 
     useEffect(() => {
-        const arrInput = ["email", "password", "phoneNumber", "firstName", "lastName", "address", "image"]
+        const arrInput = ["email", "password", "phoneNumber", "firstName", "lastName", "address", "image", "positionId", "roleId"]
         for (let i = 0; i < arrInput.length; i++) {
-            setInputs(prevState => ({
-                ...prevState,
-                [arrInput[i]]: ""
-            }))
+            if (arrInput[i] === "positionId")
+                setInputs(prevState => ({
+                    ...prevState,
+                    [arrInput[i]]: "P0"
+                }))
+            else if (arrInput[i] === "roleId")
+                setInputs(prevState => ({
+                    ...prevState,
+                    [arrInput[i]]: "R1"
+                }))
+            else
+                setInputs(prevState => ({
+                    ...prevState,
+                    [arrInput[i]]: ""
+                }))
         }
     }, [props.users])
 
@@ -69,6 +81,7 @@ function UserRedux(props) {
         }
     }
     const handleOnChangeInput = (e) => {
+        console.log(e.target)
         setInputs(prevState => ({
             ...prevState,
             [e.target.name]: e.target.value
@@ -88,7 +101,7 @@ function UserRedux(props) {
     }
     const handleSaveUser = () => {
         if (checkValidate()) {
-            console.log("handlesave", inputs)
+            console.log("handle save", inputs)
             props.createNewUser({
                 email: inputs.email,
                 phoneNumber: inputs.phoneNumber,
@@ -97,9 +110,28 @@ function UserRedux(props) {
                 lastName: inputs.lastName,
                 address: inputs.address,
                 gender: inputs.gender,
-                roleId: inputs.role,
-                positionId: inputs.position,
+                roleId: inputs.roleId,
+                positionId: inputs.positionId,
                 image: inputs.image
+            })
+        }
+    }
+
+    //lay du lieu tu` con xong load cho cha
+    const handleEditUser = (user) => {
+        if (user) {
+            console.log(user)
+            setInputs({
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                password: "dont try to see",
+                firstName: user.firstName,
+                lastName: user.lastName,
+                address: user.address,
+                gender: user.gender,
+                roleId: user.roleId,
+                positionId: user.positionId,
+                image: user.image
             })
         }
     }
@@ -179,8 +211,9 @@ function UserRedux(props) {
                         <div className="col-3">
                             <label htmlFor=""><FormattedMessage id="manage-user.position" /></label>
                             <select id="" className="form-control"
-                                name="position"
-                                value={inputs.position}
+                                name="positionId"
+                                value={inputs.positionId}
+
                                 onChange={handleOnChangeInput}
                             >
                                 {
@@ -194,8 +227,8 @@ function UserRedux(props) {
                         <div className="col-3">
                             <label htmlFor=""><FormattedMessage id="manage-user.role" /></label>
                             <select id="" className="form-control"
-                                name="role"
-                                value={inputs.role}
+                                name="roleId"
+                                value={inputs.roleId}
                                 onChange={handleOnChangeInput}
                             >
                                 {
@@ -238,7 +271,7 @@ function UserRedux(props) {
                             ><FormattedMessage id="manage-user.save" /></button>
                         </div>
                         <div className="col-12 my-5">
-                            <TableUserManage />
+                            <TableUserManage handleEditUser={handleEditUser} />
                         </div>
                     </div>
 
