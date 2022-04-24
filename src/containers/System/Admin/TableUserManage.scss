@@ -1,0 +1,18 @@
+.table-user-manage {
+    .td-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .btn-edit-user {
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+        .btn-delete-user {
+            cursor: pointer;
+            border: none;
+            outline: none;
+            margin-left: 4px;
+        }
+    }
+}
