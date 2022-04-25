@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FormattedMessage } from "react-intl";
 import { connect } from 'react-redux';
-import { LANGUAGE, CRUD_ACTION } from "../../../utils/constant"
+import { CRUD_ACTION } from "../../../utils/constant"
+import CommonUtils from "../../../utils/CommonUtils"
 import * as action from "../../../store/actions/adminAction"
 import "./UserRedux.scss"
 import Lightbox from 'react-image-lightbox';
@@ -70,14 +71,19 @@ function UserRedux(props) {
         }
     }, [props.users])
 
-    const handleOnChangeImg = (e) => {
+    const handleOnChangeImg = async (e) => {
         const data = e.target.files
-        const img = data[0] // lay thang dau tien thoi
-        if (img) {
-            const objectUrl = URL.createObjectURL(img);
+        const file = data[0] // lay thang dau tien thoi
+        if (file) {
+            const base64 = await CommonUtils.getBase64(file)
+            const objectUrl = URL.createObjectURL(file);
             setImg(objectUrl)
+            setInputs(prevState => ({
+                ...prevState,
+                image: base64
+            }))
+
         }
-        console.log("onchangeimg", inputs)
 
     }
     const handleOnChangePreview = (e) => {
@@ -86,7 +92,6 @@ function UserRedux(props) {
         }
     }
     const handleOnChangeInput = (e) => {
-        console.log(e.target)
         setInputs(prevState => ({
             ...prevState,
             [e.target.name]: e.target.value
@@ -119,17 +124,24 @@ function UserRedux(props) {
                     positionId: inputs.positionId,
                     image: inputs.image
                 })
+                setImg("")
             }
         }
         if (action === CRUD_ACTION.EDIT) {
             if (checkValidate()) {
                 props.editUser({ ...inputs })
+                setImg("")
+
             }
         }
     }
 
     //lay du lieu tu` con xong load cho cha
     const handleButtonEditUser = (user) => {
+        let imgBase64 = ""
+        if (user.image) {
+            imgBase64 = new Buffer.from(user.image, "base64").toString("binary");
+        }
         if (user) {
             setInputs({
                 email: user.email,
@@ -145,6 +157,7 @@ function UserRedux(props) {
                 id: user.id
 
             })
+            setImg(imgBase64)
             setAction(CRUD_ACTION.EDIT)
         }
     }
@@ -258,8 +271,8 @@ function UserRedux(props) {
                             <label htmlFor=""><FormattedMessage id="manage-user.image" /></label>
                             <div className="preview-img-container">
                                 <input type="file" id="previewimg" hidden
-                                    name="avatar"
-                                    value={inputs.avatar}
+                                    name="image"
+                                    // value={inputs.image}
                                     onChange={(e) => {
                                         handleOnChangeImg(e)
                                         handleOnChangeInput(e)
