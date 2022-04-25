@@ -64,6 +64,7 @@
         "position": "Chức danh",
         "role": "Vai trò",
         "image": "Ảnh đại diện",
-        "save": "Lưu"
+        "create": "Thêm người dùng",
+        "edit": "Lưu thay đổi"
     }
 }

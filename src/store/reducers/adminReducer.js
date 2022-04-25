@@ -61,8 +61,8 @@ const adminReducer = (state = initialState, action) => {
             state.users = []
             return {
                 ...state,
-
             }
+        //edit user
         default:
             return state
 

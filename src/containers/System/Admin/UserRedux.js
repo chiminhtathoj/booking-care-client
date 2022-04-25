@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FormattedMessage } from "react-intl";
 import { connect } from 'react-redux';
+import { CRUD_ACTION } from "../../../utils/constant"
+import CommonUtils from "../../../utils/CommonUtils"
 import * as action from "../../../store/actions/adminAction"
 import "./UserRedux.scss"
 import Lightbox from 'react-image-lightbox';
@@ -15,6 +17,7 @@ function UserRedux(props) {
     const [img, setImg] = useState("")
     const [isOpenImg, setIsOpenImg] = useState(false)
     const [inputs, setInputs] = useState({})
+    const [action, setAction] = useState("")
 
     useEffect(() => {
         props.getGenderStart()
@@ -22,6 +25,7 @@ function UserRedux(props) {
         props.getRoleStart()
 
     }, [])
+    // load du lieu tu redux len xong gan vao state,cai dat mat dinh cho select down
     useEffect(() => {
         setGenders(props.genders)
         setRoles(props.roles)
@@ -34,33 +38,52 @@ function UserRedux(props) {
         if (props.positions && props.positions.length > 0)
             setInputs(prevState => ({
                 ...prevState,
-                position: props.positions[0].key
+                positionId: props.positions[0].key
             }))
         if (props.roles && props.roles.length > 0)
             setInputs(prevState => ({
                 ...prevState,
-                role: props.roles[0].key
+                roleId: props.roles[0].key
             }))
     }, [props.genders, props.positions, props.roles])
 
     useEffect(() => {
-        const arrInput = ["email", "password", "phoneNumber", "firstName", "lastName", "address", "image"]
+
+        setAction(CRUD_ACTION.CREATE)
+
+        const arrInput = ["email", "password", "phoneNumber", "firstName", "lastName", "address", "image", "positionId", "roleId"]
         for (let i = 0; i < arrInput.length; i++) {
-            setInputs(prevState => ({
-                ...prevState,
-                [arrInput[i]]: ""
-            }))
+            if (arrInput[i] === "positionId")
+                setInputs(prevState => ({
+                    ...prevState,
+                    [arrInput[i]]: "P0"
+                }))
+            else if (arrInput[i] === "roleId")
+                setInputs(prevState => ({
+                    ...prevState,
+                    [arrInput[i]]: "R1"
+                }))
+            else
+                setInputs(prevState => ({
+                    ...prevState,
+                    [arrInput[i]]: ""
+                }))
         }
     }, [props.users])
 
-    const handleOnChangeImg = (e) => {
+    const handleOnChangeImg = async (e) => {
         const data = e.target.files
-        const img = data[0] // lay thang dau tien thoi
-        if (img) {
-            const objectUrl = URL.createObjectURL(img);
+        const file = data[0] // lay thang dau tien thoi
+        if (file) {
+            const base64 = await CommonUtils.getBase64(file)
+            const objectUrl = URL.createObjectURL(file);
             setImg(objectUrl)
+            setInputs(prevState => ({
+                ...prevState,
+                image: base64
+            }))
+
         }
-        console.log("onchangeimg", inputs)
 
     }
     const handleOnChangePreview = (e) => {
@@ -87,20 +110,55 @@ function UserRedux(props) {
         return isValid
     }
     const handleSaveUser = () => {
-        if (checkValidate()) {
-            console.log("handlesave", inputs)
-            props.createNewUser({
-                email: inputs.email,
-                phoneNumber: inputs.phoneNumber,
-                password: inputs.password,
-                firstName: inputs.firstName,
-                lastName: inputs.lastName,
-                address: inputs.address,
-                gender: inputs.gender,
-                roleId: inputs.role,
-                positionId: inputs.position,
-                image: inputs.image
+        if (action === CRUD_ACTION.CREATE) {
+            if (checkValidate()) {
+                props.createNewUser({
+                    email: inputs.email,
+                    phoneNumber: inputs.phoneNumber,
+                    password: inputs.password,
+                    firstName: inputs.firstName,
+                    lastName: inputs.lastName,
+                    address: inputs.address,
+                    gender: inputs.gender,
+                    roleId: inputs.roleId,
+                    positionId: inputs.positionId,
+                    image: inputs.image
+                })
+                setImg("")
+            }
+        }
+        if (action === CRUD_ACTION.EDIT) {
+            if (checkValidate()) {
+                props.editUser({ ...inputs })
+                setImg("")
+
+            }
+        }
+    }
+
+    //lay du lieu tu` con xong load cho cha
+    const handleButtonEditUser = (user) => {
+        let imgBase64 = ""
+        if (user.image) {
+            imgBase64 = new Buffer.from(user.image, "base64").toString("binary");
+        }
+        if (user) {
+            setInputs({
+                email: user.email,
+                phoneNumber: user.phoneNumber,
+                password: "dont try to see",
+                firstName: user.firstName,
+                lastName: user.lastName,
+                address: user.address,
+                gender: user.gender,
+                roleId: user.roleId,
+                positionId: user.positionId,
+                image: user.image,
+                id: user.id
+
             })
+            setImg(imgBase64)
+            setAction(CRUD_ACTION.EDIT)
         }
     }
 
@@ -119,6 +177,7 @@ function UserRedux(props) {
                                 name="email"
                                 value={inputs.email}
                                 onChange={handleOnChangeInput}
+                                disabled={action && action === CRUD_ACTION.EDIT ? true : false}
                             />
                         </div>
                         <div className="col-3">
@@ -127,6 +186,7 @@ function UserRedux(props) {
                                 name="password"
                                 value={inputs.password}
                                 onChange={handleOnChangeInput}
+                                disabled={action && action === CRUD_ACTION.EDIT ? true : false}
                             />
                         </div>
                         <div className="col-3">
@@ -179,8 +239,9 @@ function UserRedux(props) {
                         <div className="col-3">
                             <label htmlFor=""><FormattedMessage id="manage-user.position" /></label>
                             <select id="" className="form-control"
-                                name="position"
-                                value={inputs.position}
+                                name="positionId"
+                                value={inputs.positionId}
+
                                 onChange={handleOnChangeInput}
                             >
                                 {
@@ -194,8 +255,8 @@ function UserRedux(props) {
                         <div className="col-3">
                             <label htmlFor=""><FormattedMessage id="manage-user.role" /></label>
                             <select id="" className="form-control"
-                                name="role"
-                                value={inputs.role}
+                                name="roleId"
+                                value={inputs.roleId}
                                 onChange={handleOnChangeInput}
                             >
                                 {
@@ -210,8 +271,8 @@ function UserRedux(props) {
                             <label htmlFor=""><FormattedMessage id="manage-user.image" /></label>
                             <div className="preview-img-container">
                                 <input type="file" id="previewimg" hidden
-                                    name="avatar"
-                                    value={inputs.avatar}
+                                    name="image"
+                                    // value={inputs.image}
                                     onChange={(e) => {
                                         handleOnChangeImg(e)
                                         handleOnChangeInput(e)
@@ -232,13 +293,19 @@ function UserRedux(props) {
                         </div>
                         <div className="col-12 mt-3 ">
                             <button
-                                className="btn btn-primary px-3"
+                                className={action === CRUD_ACTION.EDIT ? "btn btn-info px-3" : "btn btn-primary px-3"}
                                 onClick={handleSaveUser}
-
-                            ><FormattedMessage id="manage-user.save" /></button>
+                            >
+                                {
+                                    action === CRUD_ACTION.EDIT ? <FormattedMessage id="manage-user.edit" /> : <FormattedMessage id="manage-user.create" />
+                                }
+                            </button>
                         </div>
                         <div className="col-12 my-5">
-                            <TableUserManage />
+                            <TableUserManage
+                                handleEditUser={handleButtonEditUser}
+                                action={action}
+                            />
                         </div>
                     </div>
 
@@ -276,6 +343,8 @@ const mapDispatchToProps = dispatch => {
         getRoleStart: () => dispatch(action.fetchRoleStart()),
         createNewUser: (data) => dispatch(action.createNewUser(data)),
         loadAllUser: () => dispatch(action.loadAllUser()),
+        editUser: (userData) => dispatch(action.editUser(userData))
+
 
     };
 };
