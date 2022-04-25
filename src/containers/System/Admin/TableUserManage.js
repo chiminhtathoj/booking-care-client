@@ -27,9 +27,11 @@ function TableUserManage(props) {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Address</th>
+                    <th scope="col">Gender</th>
                     <th scope="col">Position</th>
                     <th scope="col">Role</th>
                     <th scope="col"></th>
@@ -42,9 +44,11 @@ function TableUserManage(props) {
                             <tr>
                                 <th scope="row">{user.id}</th>
                                 <td>{user.email}</td>
+                                <td>{user.phoneNumber}</td>
                                 <td>{user.firstName}</td>
                                 <td>{user.lastName}</td>
                                 <td>{user.address}</td>
+                                <td>{user.gender}</td>
                                 <td>{user.positionId}</td>
                                 <td>{user.roleId}</td>
                                 <td className='td-icon'>
@@ -78,7 +82,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         loadAllUser: () => dispatch(action.loadAllUser()),
-        deleteUser: (userId) => dispatch(action.deleteUser(userId))
+        deleteUser: (userId) => dispatch(action.deleteUser(userId)),
     };
 };
 

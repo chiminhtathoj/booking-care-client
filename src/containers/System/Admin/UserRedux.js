@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FormattedMessage } from "react-intl";
 import { connect } from 'react-redux';
+import { LANGUAGE, CRUD_ACTION } from "../../../utils/constant"
 import * as action from "../../../store/actions/adminAction"
 import "./UserRedux.scss"
 import Lightbox from 'react-image-lightbox';
@@ -15,6 +16,7 @@ function UserRedux(props) {
     const [img, setImg] = useState("")
     const [isOpenImg, setIsOpenImg] = useState(false)
     const [inputs, setInputs] = useState({})
+    const [action, setAction] = useState("")
 
     useEffect(() => {
         props.getGenderStart()
@@ -45,6 +47,9 @@ function UserRedux(props) {
     }, [props.genders, props.positions, props.roles])
 
     useEffect(() => {
+
+        setAction(CRUD_ACTION.CREATE)
+
         const arrInput = ["email", "password", "phoneNumber", "firstName", "lastName", "address", "image", "positionId", "roleId"]
         for (let i = 0; i < arrInput.length; i++) {
             if (arrInput[i] === "positionId")
@@ -100,27 +105,32 @@ function UserRedux(props) {
         return isValid
     }
     const handleSaveUser = () => {
-        if (checkValidate()) {
-            console.log("handle save", inputs)
-            props.createNewUser({
-                email: inputs.email,
-                phoneNumber: inputs.phoneNumber,
-                password: inputs.password,
-                firstName: inputs.firstName,
-                lastName: inputs.lastName,
-                address: inputs.address,
-                gender: inputs.gender,
-                roleId: inputs.roleId,
-                positionId: inputs.positionId,
-                image: inputs.image
-            })
+        if (action === CRUD_ACTION.CREATE) {
+            if (checkValidate()) {
+                props.createNewUser({
+                    email: inputs.email,
+                    phoneNumber: inputs.phoneNumber,
+                    password: inputs.password,
+                    firstName: inputs.firstName,
+                    lastName: inputs.lastName,
+                    address: inputs.address,
+                    gender: inputs.gender,
+                    roleId: inputs.roleId,
+                    positionId: inputs.positionId,
+                    image: inputs.image
+                })
+            }
+        }
+        if (action === CRUD_ACTION.EDIT) {
+            if (checkValidate()) {
+                props.editUser({ ...inputs })
+            }
         }
     }
 
     //lay du lieu tu` con xong load cho cha
-    const handleEditUser = (user) => {
+    const handleButtonEditUser = (user) => {
         if (user) {
-            console.log(user)
             setInputs({
                 email: user.email,
                 phoneNumber: user.phoneNumber,
@@ -131,8 +141,11 @@ function UserRedux(props) {
                 gender: user.gender,
                 roleId: user.roleId,
                 positionId: user.positionId,
-                image: user.image
+                image: user.image,
+                id: user.id
+
             })
+            setAction(CRUD_ACTION.EDIT)
         }
     }
 
@@ -151,6 +164,7 @@ function UserRedux(props) {
                                 name="email"
                                 value={inputs.email}
                                 onChange={handleOnChangeInput}
+                                disabled={action && action === CRUD_ACTION.EDIT ? true : false}
                             />
                         </div>
                         <div className="col-3">
@@ -159,6 +173,7 @@ function UserRedux(props) {
                                 name="password"
                                 value={inputs.password}
                                 onChange={handleOnChangeInput}
+                                disabled={action && action === CRUD_ACTION.EDIT ? true : false}
                             />
                         </div>
                         <div className="col-3">
@@ -265,13 +280,19 @@ function UserRedux(props) {
                         </div>
                         <div className="col-12 mt-3 ">
                             <button
-                                className="btn btn-primary px-3"
+                                className={action === CRUD_ACTION.EDIT ? "btn btn-info px-3" : "btn btn-primary px-3"}
                                 onClick={handleSaveUser}
-
-                            ><FormattedMessage id="manage-user.save" /></button>
+                            >
+                                {
+                                    action === CRUD_ACTION.EDIT ? <FormattedMessage id="manage-user.edit" /> : <FormattedMessage id="manage-user.create" />
+                                }
+                            </button>
                         </div>
                         <div className="col-12 my-5">
-                            <TableUserManage handleEditUser={handleEditUser} />
+                            <TableUserManage
+                                handleEditUser={handleButtonEditUser}
+                                action={action}
+                            />
                         </div>
                     </div>
 
@@ -309,6 +330,8 @@ const mapDispatchToProps = dispatch => {
         getRoleStart: () => dispatch(action.fetchRoleStart()),
         createNewUser: (data) => dispatch(action.createNewUser(data)),
         loadAllUser: () => dispatch(action.loadAllUser()),
+        editUser: (userData) => dispatch(action.editUser(userData))
+
 
     };
 };
