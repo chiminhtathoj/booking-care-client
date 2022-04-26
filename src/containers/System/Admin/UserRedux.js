@@ -33,17 +33,17 @@ function UserRedux(props) {
         if (props.genders && props.genders.length > 0)
             setInputs(prevState => ({
                 ...prevState,
-                gender: props.genders[0].key
+                gender: props.genders[0].keyMap
             }))
         if (props.positions && props.positions.length > 0)
             setInputs(prevState => ({
                 ...prevState,
-                positionId: props.positions[0].key
+                positionId: props.positions[0].keyMap
             }))
         if (props.roles && props.roles.length > 0)
             setInputs(prevState => ({
                 ...prevState,
-                roleId: props.roles[0].key
+                roleId: props.roles[0].keyMap
             }))
     }, [props.genders, props.positions, props.roles])
 
@@ -153,7 +153,7 @@ function UserRedux(props) {
                 gender: user.gender,
                 roleId: user.roleId,
                 positionId: user.positionId,
-                image: user.image,
+                image: imgBase64,
                 id: user.id
 
             })
@@ -231,7 +231,7 @@ function UserRedux(props) {
                                 {
                                     genders && genders.length > 0 &&
                                     genders.map((gender, index) => {
-                                        return (<option key={index} value={gender.key}>{gender.valueVi}</option>)
+                                        return (<option key={index} value={gender.keyMap}>{gender.valueVi}</option>)
                                     })
                                 }
                             </select>
@@ -247,7 +247,7 @@ function UserRedux(props) {
                                 {
                                     positions && positions.length > 0 &&
                                     positions.map((position, index) => {
-                                        return (<option key={index} value={position.key}>{position.valueVi}</option>)
+                                        return (<option key={index} value={position.keyMap}>{position.valueVi}</option>)
                                     })
                                 }
                             </select>
@@ -262,7 +262,7 @@ function UserRedux(props) {
                                 {
                                     roles && roles.length > 0 &&
                                     roles.map((role, index) => {
-                                        return (<option key={index} value={role.key}>{role.valueVi}</option>)
+                                        return (<option key={index} value={role.keyMap}>{role.valueVi}</option>)
                                     })
                                 }
                             </select>

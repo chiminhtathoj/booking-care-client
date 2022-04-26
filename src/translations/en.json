@@ -12,7 +12,7 @@
         "welcome": "Welcome"
     },
     "banner": {
-        "title-first": "Medical background",
+        "title-first": "Medical flatform",
         "title-second": "Comprehensive health care",
         "examination-specialized": "Specialized examination",
         "examination-remote": "Remote examination",
@@ -66,5 +66,9 @@
         "image": "Avatar",
         "create": "Create user",
         "edit": "Change user"
+    },
+    "home-page": {
+        "outstanding-doctor": "Last week's featured doctor",
+        "more-info": "More"
     }
 }

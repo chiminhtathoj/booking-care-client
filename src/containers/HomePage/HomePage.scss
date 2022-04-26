@@ -22,6 +22,9 @@
         color: red !important;
     }
 }
+.slick-disabled {
+    display: none !important;
+}
 .section-share {
     height: 330px;
     border-bottom: 3px solid #efeef5;
@@ -89,7 +92,7 @@
                         background-image: url("../../assets/medical-facitily/bv-yhcttw.jpg");
                     }
                     &.section-outstanding-doctor {
-                        background-image: url("../../assets/outstanding-doctor/bs-hoai-huong.jpg");
+                        // background-image: url("../../assets/outstanding-doctor/bs-hoai-huong.jpg");
                         height: 120px;
                         width: 120px;
                         border-radius: 50%;
