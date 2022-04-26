@@ -187,7 +187,6 @@ export const editUser = (userData) => {
     return async (dispatch, getState) => {
         try {
             let res = await editUserAPI(userData)
-            console.log(res)
             if (res && res.errCode === 0) {
                 dispatch(editUserSuccess())
                 dispatch(loadAllUser())
@@ -212,3 +211,4 @@ export const editUserSuccess = () => ({
 export const editUserFail = () => ({
     type: actionTypes.EDIT_USER_FAIL
 });
+
