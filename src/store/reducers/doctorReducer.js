@@ -1,7 +1,8 @@
 import actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    topDoctors: []
+    topDoctors: [],
+    allDoctors: []
 }
 
 const doctorReducer = (state = initialState, action) => {
@@ -18,6 +19,19 @@ const doctorReducer = (state = initialState, action) => {
             stateDoctorTopClone.topDoctors = []
             return {
                 ...stateDoctorTopClone,
+            }
+        //get all doctor
+        case actionTypes.FETCH_ALL_DOCTOR_SUCCESS:
+            let stateAllDoctor = { ...state }
+            stateAllDoctor.allDoctors = action.allDoctorData
+            return {
+                ...stateAllDoctor,
+            }
+        case actionTypes.FETCH_ALL_DOCTOR_FAIL:
+            let stateAllDoctorClone = { ...state }
+            stateAllDoctorClone.allDoctors = []
+            return {
+                ...stateAllDoctorClone,
             }
         default:
             return state

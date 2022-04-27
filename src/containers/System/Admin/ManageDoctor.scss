@@ -1,0 +1,14 @@
+.manage-doctor-container {
+    padding: 10px;
+    .more-info {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 10px;
+        .content-left {
+            width: 30%;
+        }
+        .content-right {
+            width: 70%;
+        }
+    }
+}
