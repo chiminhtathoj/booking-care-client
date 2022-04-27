@@ -3,22 +3,24 @@ import { connect } from 'react-redux';
 import Slider from "react-slick";
 import { FormattedMessage } from "react-intl";
 import * as action from "../../../store/actions/"
+import { useHistory } from "react-router-dom";
 import { LANGUAGES } from "../../../utils/"
 
 
 function OutstandingDoctor(props) {
-
+    let history = useHistory()
     const [arrDoctor, setArrDoctor] = useState([])
     useEffect(() => {
         props.getTopDoctorStart()
     }, [])
     useEffect(() => {
-        console.log("props.topDoctors", props.topDoctors)
         setArrDoctor(props.topDoctors)
     }, [props.topDoctors])
-    useEffect(() => {
-        console.log("arrdctor", arrDoctor)
-    }, [arrDoctor])
+    const handleOnClickOutstandingDoctor = (doctor) => {
+        history.push(`/detail-doctor/${doctor.id}`)
+        console.log(doctor)
+    }
+
     return (
         <div className="section-share section-outstanding-doctor">
             <div className="section-container">
@@ -36,9 +38,9 @@ function OutstandingDoctor(props) {
                                     imgBase64 = new Buffer.from(doctor.image, "base64").toString("binary");
                                 }
                                 const nameVi = doctor.positionData.valueVi + " " + doctor.lastName + " " + doctor.firstName
-                                const nameEn = doctor.positionData.valueVi + " " + doctor.firstName + " " + doctor.lastName
+                                const nameEn = doctor.positionData.valueEn + " " + doctor.firstName + " " + doctor.lastName
                                 return (
-                                    < div className="section-customize ">
+                                    < div className="section-customize " onClick={() => handleOnClickOutstandingDoctor(doctor)}>
                                         <div className="outer-border">
                                             <div className="outer-bg">
                                                 <div className="section-img section-outstanding-doctor"

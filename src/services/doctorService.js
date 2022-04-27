@@ -13,10 +13,18 @@ const createInfoDoctorAPI = (infoDoctor) => {
     return axios.post("/api/create-info-doctor", infoDoctor)
 }
 
+const getDetailDoctorByIdAPI = (idDoctor) => {
+    return axios.get("/api/get-detail-doctor", {
+        params: {
+            id: idDoctor
+        }
+    })
+}
 
 
 export {
     getTopDoctorAPI,
     getAllDoctorAPI,
-    createInfoDoctorAPI
+    createInfoDoctorAPI,
+    getDetailDoctorByIdAPI
 }
