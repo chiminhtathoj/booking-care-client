@@ -6,6 +6,17 @@ const getTopDoctorAPI = (limit) => {
         }
     })
 }
+const getAllDoctorAPI = () => {
+    return axios.get("/api/get-top-doctor")
+}
+const createInfoDoctorAPI = (infoDoctor) => {
+    return axios.post("/api/create-info-doctor", infoDoctor)
+}
+
+
+
 export {
-    getTopDoctorAPI
+    getTopDoctorAPI,
+    getAllDoctorAPI,
+    createInfoDoctorAPI
 }

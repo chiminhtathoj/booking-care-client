@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import "./TableUserManage.scss"
 import * as action from "../../../store/actions/adminAction"
-import MarkdownIt from 'markdown-it';
-import MdEditor from 'react-markdown-editor-lite';
-import 'react-markdown-editor-lite/lib/index.css';
 function TableUserManage(props) {
     const [users, setUsers] = useState([])
     useEffect(() => {
@@ -22,13 +19,6 @@ function TableUserManage(props) {
         props.handleEditUser(user)
     }
 
-
-    const mdParser = new MarkdownIt();
-
-    // Finish!
-    function handleEditorChange({ html, text }) {
-        console.log('handleEditorChange', html, text);
-    }
     return (
         <table class="table table-user-manage">
             <thead>

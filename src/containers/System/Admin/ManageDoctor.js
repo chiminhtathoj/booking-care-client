@@ -1,37 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from "react-intl";
 import "./ManageDoctor.scss"
-import * as action from "../../../store/actions/adminAction"
+import * as action from "../../../store/actions/"
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import Select from 'react-select';
+import { LANGUAGES } from "../../../utils/"
 function ManageDoctor(props) {
     const [selectedDoctor, setSelectedDoctor] = useState(null)
     const [contentHTML, setContentHTML] = useState("")
     const [contentMarkdown, setcontentMarkdown] = useState("")
     const [descDoctor, setdescDoctor] = useState("")
+    const [allDoctors, setallDoctors] = useState([])
+    useEffect(() => {
+        props.getAllDoctorStart()
+    }, [])
+    useEffect(() => {
+        setallDoctors(props.allDoctors)
+    }, [props.allDoctors])
 
     const mdParser = new MarkdownIt();
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
-    ];
-
     function handleEditorChange({ html, text }) {
         setContentHTML(html)
         setcontentMarkdown(text)
     }
 
     const handleBtnSave = () => {
-        console.log(contentHTML, contentMarkdown, descDoctor, selectedDoctor)
+        props.saveInfoDoctorStart(
+            {
+                contentHTML: contentHTML,
+                contentMarkdown: contentMarkdown,
+                description: descDoctor,
+                doctorId: selectedDoctor.value
+            }
+        )
     }
 
     const handleOnChangeDesc = (e) => {
         setdescDoctor(e.target.value)
-
+        console.log(allDoctors)
     }
+    const handleOptionSelect = (inputData) => {
+        let result = []
+        if (inputData && inputData.length > 0) {
+            inputData.map((input, index) => {
+                let obj = {}
+                let labelVi = `${input.lastName} ${input.firstName}`
+                let labelEn = `${input.firstName} ${input.lastName}`
+                obj.label = props.language === LANGUAGES.VI ? labelVi : labelEn
+                obj.value = input.id
+                result.push(obj)
+            })
+
+        }
+        return result
+    }
+
     return (
         <div className="manage-doctor-container">
             <div className="manage-doctor-title title">Thông tin bác sĩ</div>
@@ -41,7 +67,7 @@ function ManageDoctor(props) {
                     <Select
                         defaultValue={selectedDoctor}
                         onChange={setSelectedDoctor}
-                        options={options}
+                        options={handleOptionSelect(allDoctors)}
                     />
                 </div>
                 <div className="content-right">
@@ -73,12 +99,15 @@ function ManageDoctor(props) {
 }
 const mapStateToProps = state => {
     return {
-        users: state.admin.users
+        language: state.app.language,
+        allDoctors: state.doctor.allDoctors
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getAllDoctorStart: () => dispatch(action.getAllDoctorStart()),
+        saveInfoDoctorStart: (infoDoctor) => dispatch(action.saveInfoDoctorStart(infoDoctor))
     };
 };
 

@@ -1,5 +1,5 @@
 import { Button, Modal } from 'react-bootstrap';
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./ModalUser"
 function ModalEditUser(props) {
     const [email, setEmail] = useState("")
