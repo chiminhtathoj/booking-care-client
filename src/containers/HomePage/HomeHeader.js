@@ -5,13 +5,18 @@ import "./HomeHeader.scss"
 import logo from "../../assets/logo.svg"
 import { LANGUAGES } from "../../utils/constant"
 import { changeLanguageApp } from "../../store/actions"
+import { useHistory } from "react-router-dom";
 
 
 function HomeHeader(props) {
+    let history = useHistory()
     const handleLanguage = (language) => {
         props.changeLanguageAppReducer(language)
     }
     const language = props.language
+    const handleLogoToHome = () => {
+        history.push("/home")
+    }
     return (
         <>
             <div className="home-header-container">
@@ -19,7 +24,7 @@ function HomeHeader(props) {
                 <div className="home-header-content">
                     <div className="header-content-left">
                         <i className="fa-solid fa-bars"></i>
-                        <img src={logo} alt="logo" className="header-logo" />
+                        <img src={logo} alt="logo" className="header-logo" onClick={handleLogoToHome} />
                     </div>
                     <div className="header-content-center">
                         <div className="child-content-center"><b><FormattedMessage id="home-header.special" /></b>
@@ -45,63 +50,67 @@ function HomeHeader(props) {
                     </div>
                 </div>
 
-                <div className="home-header-banner">
-                    <div className="banner-top">
-                        <div className="title-first">
-                            <FormattedMessage id="banner.title-first" />
+                {
+                    props.isShowBanner &&
+
+                    <div className="home-header-banner">
+                        <div className="banner-top">
+                            <div className="title-first">
+                                <FormattedMessage id="banner.title-first" />
+                            </div>
+                            <div className="title-second">
+                                <FormattedMessage id="banner.title-second" />
+                            </div>
+                            <div className="search">
+                                <i className="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" placeholder="Tìm chuyên khoa" />
+                            </div>
                         </div>
-                        <div className="title-second">
-                            <FormattedMessage id="banner.title-second" />
+                        <div className="banner-bot">
+                            <div className="options">
+                                <div className="option-child">
+                                    <div className="icon-child"><i className="fa-solid fa-hospital"></i></div>
+                                    <div className="text-child"><FormattedMessage id="banner.examination-specialized" /></div>
+                                </div>
+                                <div className="option-child">
+                                    <div className="icon-child"><i class="fa-solid fa-mobile"></i></div>
+                                    <div className="text-child"><FormattedMessage id="banner.examination-remote" /></div>
+                                </div>
+
+                                <div className="option-child">
+                                    <div className="icon-child"><i class="fa-solid fa-stethoscope"></i></div>
+                                    <div className="text-child"><FormattedMessage id="banner.general-check" /></div>
+                                </div>
+
+                                <div className="option-child">
+                                    <div className="icon-child"><i class="fa-solid fa-microscope"></i></div>
+                                    <div className="text-child"><FormattedMessage id="banner.medical-test" />c</div>
+                                </div>
+
+                                <div className="option-child">
+                                    <div className="icon-child"><i class="fa-solid fa-user-doctor"></i></div>
+                                    <div className="text-child"><FormattedMessage id="banner.mental-health" /></div>
+                                </div>
+
+                                <div className="option-child">
+                                    <div className="icon-child"><i class="fa-solid fa-tooth"></i></div>
+                                    <div className="text-child"><FormattedMessage id="banner.dental-examination" /></div>
+                                </div>
+
+                                <div className="option-child">
+                                    <div className="icon-child"><i class="fa-solid fa-book-medical"></i></div>
+                                    <div className="text-child"><FormattedMessage id="banner.surgery-package" /></div>
+                                </div>
+
+                                <div className="option-child">
+                                    <div className="icon-child"><i class="fa-solid fa-truck-medical"></i></div>
+                                    <div className="text-child"><FormattedMessage id="banner.medical-products" /></div>
+                                </div>
+                            </div>
                         </div>
-                        <div className="search">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" placeholder="Tìm chuyên khoa" />
-                        </div>
+
                     </div>
-                    <div className="banner-bot">
-                        <div className="options">
-                            <div className="option-child">
-                                <div className="icon-child"><i className="fa-solid fa-hospital"></i></div>
-                                <div className="text-child"><FormattedMessage id="banner.examination-specialized" /></div>
-                            </div>
-                            <div className="option-child">
-                                <div className="icon-child"><i class="fa-solid fa-mobile"></i></div>
-                                <div className="text-child"><FormattedMessage id="banner.examination-remote" /></div>
-                            </div>
-
-                            <div className="option-child">
-                                <div className="icon-child"><i class="fa-solid fa-stethoscope"></i></div>
-                                <div className="text-child"><FormattedMessage id="banner.general-check" /></div>
-                            </div>
-
-                            <div className="option-child">
-                                <div className="icon-child"><i class="fa-solid fa-microscope"></i></div>
-                                <div className="text-child"><FormattedMessage id="banner.medical-test" />c</div>
-                            </div>
-
-                            <div className="option-child">
-                                <div className="icon-child"><i class="fa-solid fa-user-doctor"></i></div>
-                                <div className="text-child"><FormattedMessage id="banner.mental-health" /></div>
-                            </div>
-
-                            <div className="option-child">
-                                <div className="icon-child"><i class="fa-solid fa-tooth"></i></div>
-                                <div className="text-child"><FormattedMessage id="banner.dental-examination" /></div>
-                            </div>
-
-                            <div className="option-child">
-                                <div className="icon-child"><i class="fa-solid fa-book-medical"></i></div>
-                                <div className="text-child"><FormattedMessage id="banner.surgery-package" /></div>
-                            </div>
-
-                            <div className="option-child">
-                                <div className="icon-child"><i class="fa-solid fa-truck-medical"></i></div>
-                                <div className="text-child"><FormattedMessage id="banner.medical-products" /></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                }
             </div>
 
         </>

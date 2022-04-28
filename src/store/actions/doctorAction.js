@@ -1,4 +1,4 @@
-import { getTopDoctorAPI, getAllDoctorAPI, createInfoDoctorAPI } from "../../services/doctorService"
+import { getTopDoctorAPI, getAllDoctorAPI, createInfoDoctorAPI, getMarkdownDoctorByIdAPI } from "../../services/doctorService"
 import actionTypes from './actionTypes';
 import { toast } from "react-toastify";
 //get top doctor
@@ -81,4 +81,32 @@ export const saveInfoDoctorSuccess = () => ({
 
 export const saveInfoDoctorFail = () => ({
     type: actionTypes.CREATE_INFO_DOCTOR_FAIL
+});
+//GET CURRENT INFO DOCOTR
+export const getMarkdownDoctorStart = (idDoctor) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getMarkdownDoctorByIdAPI(idDoctor)
+            if (res && res.errCode === 0) {
+                dispatch(getMarkdownDoctorSuccess(res.data))
+                toast.success("Load content doctor successed!");
+            }
+            else {
+                toast.error("Load content doctor fail");
+                dispatch(getMarkdownDoctorFail())
+            }
+
+        } catch (error) {
+            toast.error("get markdown doctor fail");
+            console.log("getCurrentInfoDoctorStart error", error)
+        }
+    }
+}
+export const getMarkdownDoctorSuccess = (doctorData) => ({
+    type: actionTypes.FETCH_MARKDOWN_DOCTOR_SUCCESS,
+    doctorData
+});
+
+export const getMarkdownDoctorFail = () => ({
+    type: actionTypes.FETCH_MARKDOWN_DOCTOR_FAIL
 });

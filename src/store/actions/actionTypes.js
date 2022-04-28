@@ -44,6 +44,9 @@ const actionTypes = Object.freeze({
     //save info doctor
     CREATE_INFO_DOCTOR_SUCCESS: "CREATE_INFO_DOCTOR_SUCCESS",
     CREATE_INFO_DOCTOR_FAIL: "CREATE_INFO_DOCTOR_FAIL",
+    //get current info doctor 
+    FETCH_MARKDOWN_DOCTOR_SUCCESS: "FETCH_MARKDOWN_DOCTOR_SUCCESS",
+    FETCH_MARKDOWN_DOCTOR_FAIL: "FETCH_MARKDOWN_DOCTOR_FAIL",
 })
 
 export default actionTypes;
