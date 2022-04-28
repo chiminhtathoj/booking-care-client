@@ -1,25 +1,37 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from "react-intl";
 
 import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
-import { adminMenu } from './menuApp';
+import { adminMenu, doctorMenu } from './menuApp';
 import './Header.scss';
-import { LANGUAGES } from "../../utils/constant"
+import { LANGUAGES, USER_ROLE } from "../../utils/constant"
+import _ from "lodash"
 
 
 function Header(props) {
+    const [menuApp, setMenuApp] = useState([])
     const { processLogout, language, userInfo } = props
     const handleChangeLanguage = (language) => {
         props.changeLanguageAppReducer(language)
-
     }
+    useEffect(() => {
+        const { userInfo } = props
+        let menu = []
+        if (userInfo && !_.isEmpty(userInfo)) {
+            if (userInfo.roleId === USER_ROLE.ADMIN)
+                menu = adminMenu
+            if (userInfo.roleId === USER_ROLE.DOCTOR)
+                menu = doctorMenu
+        }
+        setMenuApp(menu)
+    }, [])
     return (
         <div className="header-container">
             {/* thanh navigator */}
             <div className="header-tabs-container">
-                <Navigator menus={adminMenu} />
+                <Navigator menus={menuApp} />
             </div>
             <div className="header-languages">
                 <span className="text-welcome" style={{ textTransform: "capitalize" }}>  <FormattedMessage id="home-header.welcome" />,
