@@ -1,7 +1,7 @@
 .detail-doctor-banner {
-    margin-top: 80px;
-    padding: 10px 200px;
     .intro-doctor {
+        margin-top: 80px;
+        padding: 10px 280px;
         display: flex;
         .content-left {
             width: 20%;
@@ -14,5 +14,10 @@
             width: 80%;
             padding-left: 20px;
         }
+    }
+    .info-doctor {
+        background-color: #f9f9f9;
+        padding: 10px 280px;
+        border: solid 1px #ddd;
     }
 }

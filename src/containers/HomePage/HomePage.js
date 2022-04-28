@@ -17,7 +17,7 @@ function HomePage() {
     const settings = {
         dots: false,
         infinite: false,
-        speed: 200,
+        speed: 150,
         slidesToShow: 4,
         slidesToScroll: 1
     };

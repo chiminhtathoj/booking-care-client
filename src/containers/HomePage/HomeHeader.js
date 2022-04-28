@@ -5,13 +5,18 @@ import "./HomeHeader.scss"
 import logo from "../../assets/logo.svg"
 import { LANGUAGES } from "../../utils/constant"
 import { changeLanguageApp } from "../../store/actions"
+import { useHistory } from "react-router-dom";
 
 
 function HomeHeader(props) {
+    let history = useHistory()
     const handleLanguage = (language) => {
         props.changeLanguageAppReducer(language)
     }
     const language = props.language
+    const handleLogoToHome = () => {
+        history.push("/home")
+    }
     return (
         <>
             <div className="home-header-container">
@@ -19,7 +24,7 @@ function HomeHeader(props) {
                 <div className="home-header-content">
                     <div className="header-content-left">
                         <i className="fa-solid fa-bars"></i>
-                        <img src={logo} alt="logo" className="header-logo" />
+                        <img src={logo} alt="logo" className="header-logo" onClick={handleLogoToHome} />
                     </div>
                     <div className="header-content-center">
                         <div className="child-content-center"><b><FormattedMessage id="home-header.special" /></b>

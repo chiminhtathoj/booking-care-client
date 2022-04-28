@@ -20,11 +20,19 @@ const getDetailDoctorByIdAPI = (idDoctor) => {
         }
     })
 }
+const getMarkdownDoctorByIdAPI = (idDoctor) => {
+    return axios.get("/api/get-markdown-doctor", {
+        params: {
+            id: idDoctor
+        }
+    })
+}
 
 
 export {
     getTopDoctorAPI,
     getAllDoctorAPI,
     createInfoDoctorAPI,
-    getDetailDoctorByIdAPI
+    getDetailDoctorByIdAPI,
+    getMarkdownDoctorByIdAPI
 }

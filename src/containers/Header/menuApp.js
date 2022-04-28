@@ -44,4 +44,24 @@ export const adminMenu = [
             }
         ]
     },
-];
+    //Quản lý kế hoạch khám bệnh
+    {
+        name: 'menu.doctor.manage-schedule', menus: [
+            {
+                name: 'menu.doctor.schedule', link: "/system/user-manage"
+            }
+        ]
+    }
+]
+
+//doctor
+export const doctorMenu = [
+    //Quản lý kế hoạch khám bệnh
+    {
+        name: 'menu.doctor.manage-schedule', menus: [
+            {
+                name: 'menu.doctor.schedule', link: "/system/user-manage"
+            }
+        ]
+    }
+]

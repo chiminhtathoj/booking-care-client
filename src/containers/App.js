@@ -43,8 +43,6 @@ function App(props) {
         <Fragment>
             <Router history={history}>
                 <div className="main-container">
-
-
                     <div className="content-container">
                         <Switch>
                             <CustomScrollbars style={{ height: "100vh", width: "100%" }}>

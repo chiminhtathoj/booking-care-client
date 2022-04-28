@@ -11,31 +11,28 @@ import { LANGUAGES } from "../../../utils/"
 function DetailDoctor(props) {
 
     const [detailDoctor, setDetailDoctor] = useState({})
-    const [nameVi, setNameVi] = useState("")
-    const [nameEn, setNameEn] = useState("")
+    // const [nameVi, setNameVi] = useState("")
+    // const [nameEn, setNameEn] = useState("")
+    let nameVi = "", nameEn = ""
 
-    console.log("2")
     useEffect(() => {
         const data = async () => {
-            console.log("1")
-
             const doctor = await getDetailDoctorByIdAPI(props.match.params.id)
             if (doctor && doctor.errCode === 0) {
                 setDetailDoctor(doctor.data)
             }
         }
         data()
-
     }, [props.match.params.id])
 
+
     useEffect(() => {
-        console.log("first tiem", props.language)
-        if (detailDoctor && detailDoctor.positionData) {
-            setNameVi(detailDoctor.positionData.valueVi + " " + detailDoctor.lastName + " " + detailDoctor.firstName)
-            setNameEn(detailDoctor.positionData.valueEn + " " + detailDoctor.firstName + " " + detailDoctor.lastName)
-            console.log(nameEn)
-        }
     }, [props.language])
+
+    if (detailDoctor && detailDoctor.positionData) {
+        nameVi = detailDoctor.positionData.valueVi + " " + detailDoctor.lastName + " " + detailDoctor.firstName
+        nameEn = detailDoctor.positionData.valueEn + " " + detailDoctor.firstName + " " + detailDoctor.lastName
+    }
     return (
         <>
             <HomeHeader isShowBanner={false} />
@@ -50,7 +47,7 @@ function DetailDoctor(props) {
                     </div>
                     <div className="content-right">
                         <div className="up">
-                            <h4>{props.language === LANGUAGES.VI ? nameVi : nameEn}</h4>
+                            <h2>{props.language === LANGUAGES.VI ? nameVi : nameEn}</h2>
                         </div>
                         <div className="down">
                             {
@@ -66,7 +63,11 @@ function DetailDoctor(props) {
 
                 </div>
                 <div className="info-doctor">
-
+                    {
+                        detailDoctor.Markdown && detailDoctor.Markdown.contentHTML &&
+                        (<div dangerouslySetInnerHTML={{ __html: detailDoctor.Markdown.contentHTML }}>
+                        </div>)
+                    }
                 </div>
                 <div className="comment-doctor">
 
@@ -84,7 +85,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeLanguageAppReducer: (language) => dispatch(action.changeLanguageApp(language))
+        changeLanguageAppReducer: (language) => dispatch(action.changeLanguageApp(language)),
+
     };
 };
 

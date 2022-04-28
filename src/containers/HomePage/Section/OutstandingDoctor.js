@@ -18,7 +18,6 @@ function OutstandingDoctor(props) {
     }, [props.topDoctors])
     const handleOnClickOutstandingDoctor = (doctor) => {
         history.push(`/detail-doctor/${doctor.id}`)
-        console.log(doctor)
     }
 
     return (
@@ -40,20 +39,25 @@ function OutstandingDoctor(props) {
                                 const nameVi = doctor.positionData.valueVi + " " + doctor.lastName + " " + doctor.firstName
                                 const nameEn = doctor.positionData.valueEn + " " + doctor.firstName + " " + doctor.lastName
                                 return (
-                                    < div className="section-customize " onClick={() => handleOnClickOutstandingDoctor(doctor)}>
+                                    < div className="section-customize " >
                                         <div className="outer-border">
                                             <div className="outer-bg">
                                                 <div className="section-img section-outstanding-doctor"
                                                     style={{
                                                         backgroundImage: `url(${imgBase64})`
                                                     }}
+                                                    onClick={() => handleOnClickOutstandingDoctor(doctor)}
                                                 />
                                             </div>
                                             <div className="outer-text text-center">
                                                 <div>Cơ xương khớp</div>
-                                                <div style={{
-                                                    textTransform: "capitalize"
-                                                }}>{props.language === LANGUAGES.VI ? nameVi : nameEn}</div>
+                                                <div
+                                                    onClick={() => handleOnClickOutstandingDoctor(doctor)}
+                                                    style={{
+                                                        textTransform: "capitalize",
+                                                        cursor: "pointer"
+                                                    }}>{props.language === LANGUAGES.VI ? nameVi : nameEn}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
