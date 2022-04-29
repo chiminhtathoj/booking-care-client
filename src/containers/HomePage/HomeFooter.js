@@ -15,7 +15,7 @@ function HomeFooter(props) {
                         <i className="fa-brands fa-facebook customize-facebook"></i>
                     </a>
                     <a target="_blank" href="https://youtube.com" alt="youtube">
-                        <i class="fa-brands fa-youtube customize-youtube"> </i>
+                        <i className="fa-brands fa-youtube customize-youtube"> </i>
                     </a>
                 </div>
             </div>

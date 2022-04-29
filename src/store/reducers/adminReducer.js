@@ -4,7 +4,8 @@ const initialState = {
     genders: [],
     roles: [],
     positions: [],
-    users: []
+    users: [],
+    times: []
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -62,7 +63,19 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
-        //edit user
+        //get all time
+        case actionTypes.FETCH_TIME_SUCCESS:
+            let stateTime = { ...state }
+            stateTime.times = action.data
+            return {
+                ...stateTime,
+            }
+        case actionTypes.FETCH_TIME_FAIL:
+            let stateTimeClone = { ...state }
+            stateTimeClone.times = []
+            return {
+                ...stateTimeClone,
+            }
         default:
             return state
 

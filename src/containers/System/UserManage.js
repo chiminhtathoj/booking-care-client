@@ -102,7 +102,7 @@ function UserManage() {
             <div className="title text-center">Manage users</div>
             <div className="users-table mx-5 mt-5">
                 <div className="btn btn-primary px-3" onClick={handleShowNewUser}>Add new user</div>
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -115,9 +115,9 @@ function UserManage() {
                     </thead>
                     <tbody>
                         {
-                            users.map((user, index) => {
+                            users.map((user, i) => {
                                 return (
-                                    <tr>
+                                    <tr key={i}>
                                         <th scope="row">{user.id}</th>
                                         <td>{user.email}</td>
                                         <td>{user.firstName}</td>
@@ -142,7 +142,7 @@ function UserManage() {
         </div >
     )
 }
-// class UserManage extends Component {
+// className UserManage extends Component {
 
 //     state = {
 

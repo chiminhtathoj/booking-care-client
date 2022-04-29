@@ -34,6 +34,11 @@ function Login(props) {
             }
         }
     }
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleLogin()
+        }
+    }
     return (
         <div className="login-background">
             <div className="login-container">
@@ -75,6 +80,7 @@ function Login(props) {
                             className="btn-login"
                             tabIndex="5"
                             onClick={() => handleLogin()}
+                            onKeyDown={e => handleKeyDown(e)}
                         >
                             Login
                         </button>
