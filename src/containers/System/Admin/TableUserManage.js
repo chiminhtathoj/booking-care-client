@@ -20,7 +20,7 @@ function TableUserManage(props) {
     }
 
     return (
-        <table class="table table-user-manage">
+        <table className="table table-user-manage">
             <thead>
                 <tr>
                     <th scope="col">#</th>

@@ -46,14 +46,16 @@ function App(props) {
                 <div className="main-container">
                     <div className="content-container">
                         <Switch>
-                            <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
-                                <Route path={path.HOME} exact component={(Home)} />
-                                <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                <Route path={path.DOCTOR} component={userIsAuthenticated(Doctor)} />
-                                <Route path={path.HOMEPAGE} component={HomePage} />
-                                <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
-                            </CustomScrollbars>
+                            <>
+                                <CustomScrollbars style={{ height: "100vh", width: "100%" }}>
+                                    <Route path={path.HOME} exact component={(Home)} />
+                                    <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                    <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    <Route path={path.DOCTOR} component={userIsAuthenticated(Doctor)} />
+                                    <Route path={path.HOMEPAGE} component={HomePage} />
+                                    <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                                </CustomScrollbars>
+                            </>
                         </Switch>
                     </div>
                     <ToastContainer

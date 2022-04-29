@@ -1,0 +1,16 @@
+.manage-schedule-container {
+    .container {
+        .row {
+            .choose-hour-container {
+                margin: 10px 0;
+                display: flex;
+                gap: 20px;
+                flex-wrap: wrap;
+                button {
+                    padding: 0 15px;
+                    border: solid 1px #999;
+                }
+            }
+        }
+    }
+}

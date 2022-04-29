@@ -279,7 +279,7 @@ function UserRedux(props) {
                                     }
                                     }
                                 />
-                                <label htmlFor="previewimg" className="label-img">Tải ảnh <i class="fa-solid fa-upload"></i></label>
+                                <label htmlFor="previewimg" className="label-img">Tải ảnh <i className="fa-solid fa-upload"></i></label>
 
                             </div>
                         </div>
@@ -344,8 +344,6 @@ const mapDispatchToProps = dispatch => {
         createNewUser: (data) => dispatch(action.createNewUser(data)),
         loadAllUser: () => dispatch(action.loadAllUser()),
         editUser: (userData) => dispatch(action.editUser(userData))
-
-
     };
 };
 

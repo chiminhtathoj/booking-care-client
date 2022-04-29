@@ -73,37 +73,37 @@ function HomeHeader(props) {
                                     <div className="text-child"><FormattedMessage id="banner.examination-specialized" /></div>
                                 </div>
                                 <div className="option-child">
-                                    <div className="icon-child"><i class="fa-solid fa-mobile"></i></div>
+                                    <div className="icon-child"><i className="fa-solid fa-mobile"></i></div>
                                     <div className="text-child"><FormattedMessage id="banner.examination-remote" /></div>
                                 </div>
 
                                 <div className="option-child">
-                                    <div className="icon-child"><i class="fa-solid fa-stethoscope"></i></div>
+                                    <div className="icon-child"><i className="fa-solid fa-stethoscope"></i></div>
                                     <div className="text-child"><FormattedMessage id="banner.general-check" /></div>
                                 </div>
 
                                 <div className="option-child">
-                                    <div className="icon-child"><i class="fa-solid fa-microscope"></i></div>
+                                    <div className="icon-child"><i className="fa-solid fa-microscope"></i></div>
                                     <div className="text-child"><FormattedMessage id="banner.medical-test" />c</div>
                                 </div>
 
                                 <div className="option-child">
-                                    <div className="icon-child"><i class="fa-solid fa-user-doctor"></i></div>
+                                    <div className="icon-child"><i className="fa-solid fa-user-doctor"></i></div>
                                     <div className="text-child"><FormattedMessage id="banner.mental-health" /></div>
                                 </div>
 
                                 <div className="option-child">
-                                    <div className="icon-child"><i class="fa-solid fa-tooth"></i></div>
+                                    <div className="icon-child"><i className="fa-solid fa-tooth"></i></div>
                                     <div className="text-child"><FormattedMessage id="banner.dental-examination" /></div>
                                 </div>
 
                                 <div className="option-child">
-                                    <div className="icon-child"><i class="fa-solid fa-book-medical"></i></div>
+                                    <div className="icon-child"><i className="fa-solid fa-book-medical"></i></div>
                                     <div className="text-child"><FormattedMessage id="banner.surgery-package" /></div>
                                 </div>
 
                                 <div className="option-child">
-                                    <div className="icon-child"><i class="fa-solid fa-truck-medical"></i></div>
+                                    <div className="icon-child"><i className="fa-solid fa-truck-medical"></i></div>
                                     <div className="text-child"><FormattedMessage id="banner.medical-products" /></div>
                                 </div>
                             </div>

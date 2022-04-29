@@ -212,3 +212,29 @@ export const editUserFail = () => ({
     type: actionTypes.EDIT_USER_FAIL
 });
 
+//get all time from all code
+export const fetchTimeStart = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeAPI("TIME")
+            if (res && res.errCode === 0) {
+                dispatch(fetchTimeSuccess(res.data))
+            }
+            else {
+                dispatch(fetchTimeFail())
+            }
+
+        } catch (error) {
+            console.log("fetchTimeStart error", error)
+        }
+    }
+}
+
+export const fetchTimeSuccess = (timeData) => ({
+    type: actionTypes.FETCH_TIME_SUCCESS,
+    data: timeData
+});
+
+export const fetchTimeFail = () => ({
+    type: actionTypes.FETCH_TIME_FAIL
+});

@@ -47,6 +47,9 @@ const actionTypes = Object.freeze({
     //get current info doctor 
     FETCH_MARKDOWN_DOCTOR_SUCCESS: "FETCH_MARKDOWN_DOCTOR_SUCCESS",
     FETCH_MARKDOWN_DOCTOR_FAIL: "FETCH_MARKDOWN_DOCTOR_FAIL",
+    //get all time in all code
+    FETCH_TIME_SUCCESS: "FETCH_TIME_SUCCESS",
+    FETCH_TIME_FAIL: "FETCH_TIME_FAIL",
 })
 
 export default actionTypes;
