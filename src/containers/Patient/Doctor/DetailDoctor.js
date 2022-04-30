@@ -62,7 +62,7 @@ function DetailDoctor(props) {
                 </div>
                 <div className="book-doctor">
                     <div className="content-left">
-                        <DoctorSchedule />
+                        <DoctorSchedule doctorIdFromParent={detailDoctor && detailDoctor.id ? detailDoctor.id : -1} />
                     </div>
                     <div className="content-right">
 

@@ -81,6 +81,8 @@
         "save": "Save",
         "error-selected-doctor": "Please choose a doctor",
         "error-selected-time": "Please choose a time period",
-        "error-selected-date": "Please choose a date"
+        "error-selected-date": "Please choose a date",
+        "error-create-fail": "Create schedule failed!",
+        "create-success": "Create schedule successed!"
     }
 }

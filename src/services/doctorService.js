@@ -31,6 +31,14 @@ const getMarkdownDoctorByIdAPI = (idDoctor) => {
 const createBulkScheduleAPI = (data) => {
     return axios.post("/api/create-bulk-schedule", data)
 }
+const getScheduleDoctorByIdAndDateAPI = (idDoctor, date) => {
+    return axios.get("/api/get-schedule-doctor", {
+        params: {
+            idDoctor,
+            date
+        }
+    })
+}
 
 
 
@@ -41,5 +49,6 @@ export {
     createInfoDoctorAPI,
     getDetailDoctorByIdAPI,
     getMarkdownDoctorByIdAPI,
-    createBulkScheduleAPI
+    createBulkScheduleAPI,
+    getScheduleDoctorByIdAndDateAPI
 }

@@ -13,7 +13,7 @@ function About(props) {
                     <iframe width="570px" height="320px" src="https://www.youtube.com/embed/FyDQljKtWnI"
                         title="YouTube video player" frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullscreen></iframe>
+                        allowFullScreen></iframe>
                 </div>
                 <div className="content-right">
                     <p>Truyền thông chưa bao giờ nói gì về mình cả :(((</p>

@@ -39,7 +39,7 @@ function OutstandingDoctor(props) {
                                 const nameVi = doctor.positionData.valueVi + " " + doctor.lastName + " " + doctor.firstName
                                 const nameEn = doctor.positionData.valueEn + " " + doctor.firstName + " " + doctor.lastName
                                 return (
-                                    < div className="section-customize " >
+                                    < div className="section-customize" key={index} >
                                         <div className="outer-border">
                                             <div className="outer-bg">
                                                 <div className="section-img section-outstanding-doctor"

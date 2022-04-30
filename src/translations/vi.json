@@ -81,6 +81,8 @@
         "save": "Lưu thông tin",
         "error-selected-doctor": "Vui lòng chọn bác sĩ",
         "error-selected-time": "Vui lòng chọn khoảng thời gian",
-        "error-selected-date": "Vui lòng chọn ngày"
+        "error-selected-date": "Vui lòng chọn ngày",
+        "error-create-fail": "Thêm lịch trình thất bại!",
+        "create-success": "Thêm lịch trình thành công!"
     }
 }
