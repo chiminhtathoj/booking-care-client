@@ -78,6 +78,9 @@
         "title": "Manage your doctor's appointment schedule",
         "choose-doctor": "Choose doctor",
         "choose-date": "Choose date",
-        "save": "Save"
+        "save": "Save",
+        "error-selected-doctor": "Please choose a doctor",
+        "error-selected-time": "Please choose a time period",
+        "error-selected-date": "Please choose a date"
     }
 }

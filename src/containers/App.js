@@ -60,7 +60,7 @@ function App(props) {
                     </div>
                     <ToastContainer
                         position="bottom-right"
-                        autoClose={4000}
+                        autoClose={3500}
                         hideProgressBar={false}
                         newestOnTop={false}
                         closeOnClick

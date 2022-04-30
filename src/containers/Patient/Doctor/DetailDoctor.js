@@ -6,6 +6,7 @@ import "./DetailDoctor.scss"
 import { getDetailDoctorByIdAPI } from "../../../services/doctorService"
 import * as action from "../../../store/actions/"
 import { LANGUAGES } from "../../../utils/"
+import DoctorSchedule from './DoctorSchedule';
 
 
 function DetailDoctor(props) {
@@ -60,7 +61,12 @@ function DetailDoctor(props) {
                     </div>
                 </div>
                 <div className="book-doctor">
+                    <div className="content-left">
+                        <DoctorSchedule />
+                    </div>
+                    <div className="content-right">
 
+                    </div>
                 </div>
                 <div className="info-doctor">
                     {
