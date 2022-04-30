@@ -6,9 +6,17 @@
                 display: flex;
                 gap: 20px;
                 flex-wrap: wrap;
-                button {
+                .btn-schedule {
+                    display: block;
                     padding: 0 15px;
                     border: solid 1px #999;
+
+                    &.active {
+                        background-color: #ffff00b5;
+                    }
+                    &:hover {
+                        background-color: #ffff00b5;
+                    }
                 }
             }
         }

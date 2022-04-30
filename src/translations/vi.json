@@ -78,6 +78,9 @@
         "title": "Quản lý lịch trình khám bệnh của bác sĩ",
         "choose-doctor": "Chọn bác sĩ",
         "choose-date": "Chọn ngày",
-        "save": "Lưu thông tin"
+        "save": "Lưu thông tin",
+        "error-selected-doctor": "Vui lòng chọn bác sĩ",
+        "error-selected-time": "Vui lòng chọn khoảng thời gian",
+        "error-selected-date": "Vui lòng chọn ngày"
     }
 }

@@ -28,11 +28,18 @@ const getMarkdownDoctorByIdAPI = (idDoctor) => {
     })
 }
 
+const createBulkScheduleAPI = (data) => {
+    return axios.post("/api/create-bulk-schedule", data)
+}
+
+
+
 
 export {
     getTopDoctorAPI,
     getAllDoctorAPI,
     createInfoDoctorAPI,
     getDetailDoctorByIdAPI,
-    getMarkdownDoctorByIdAPI
+    getMarkdownDoctorByIdAPI,
+    createBulkScheduleAPI
 }

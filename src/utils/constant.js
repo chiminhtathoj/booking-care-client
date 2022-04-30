@@ -20,8 +20,8 @@ export const CRUD_ACTION = {
     READ: "READ"
 };
 
-export const dateFormat = {
-    SEND_TO_SERVER: 'DD/MM/YYYY'
+export const DATEFORMAT = {
+    DD_MM_YYYY: 'DD/MM/YYYY'
 };
 
 export const YesNoObj = {
