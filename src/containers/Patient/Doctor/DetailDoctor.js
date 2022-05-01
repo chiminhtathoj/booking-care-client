@@ -44,7 +44,6 @@ function DetailDoctor(props) {
                         className="content-left"
                         style={detailDoctor ? { backgroundImage: `url(${detailDoctor.image})` } : {}}
                     >
-
                     </div>
                     <div className="content-right">
                         <div className="up">
@@ -62,7 +61,7 @@ function DetailDoctor(props) {
                 </div>
                 <div className="book-doctor">
                     <div className="content-left">
-                        <DoctorSchedule />
+                        <DoctorSchedule doctorIdFromParent={detailDoctor && detailDoctor.id ? detailDoctor.id : -1} />
                     </div>
                     <div className="content-right">
 
@@ -92,7 +91,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeLanguageAppReducer: (language) => dispatch(action.changeLanguageApp(language)),
-
     };
 };
 

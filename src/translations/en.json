@@ -81,6 +81,42 @@
         "save": "Save",
         "error-selected-doctor": "Please choose a doctor",
         "error-selected-time": "Please choose a time period",
-        "error-selected-date": "Please choose a date"
+        "error-selected-date": "Please choose a date",
+        "error-create-fail": "Create schedule failed!",
+        "create-success": "Create schedule successed!"
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Schedule",
+            "non-schedule": "The doctor does not have an appointment during this time, please choose another time.",
+            "choose": "Choose ",
+            "book-free": " and book (free)"
+        }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Doctor's Information",
+            "select-doctor": "Choose a doctor",
+            "intro": "Introduction information",
+            "add": "Create",
+            "save": "Save",
+            "price": "Price of medical examination",
+            "payment": "Payment methods",
+            "province": "Province",
+            "name-clinic": "Clinic name",
+            "address-clinic": "Clinic address",
+            "note": "note",
+            "error": {
+                "contentHTML": "Please enter content HTML",
+                "contentMarkdown": "Please enter content Markdown",
+                "description": "Please enter your doctor's description",
+                "selectedDoctor": "Please choose a doctor",
+                "selectedPrice": "Please select medical examination price",
+                "selectedPayment": "Please choose a payment method",
+                "selectedProvince": "Please select province",
+                "nameClinic": "Please enter clinic name",
+                "addressClinic": "Please enter clinic address"
+            }
+        }
     }
 }

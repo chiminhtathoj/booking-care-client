@@ -71,7 +71,7 @@ function ManageSchedule(props) {
     }
     const handleClickBtnSave = async () => {
         const result = []
-        const dateFormated = new Date(currentDate).getTime()
+        const dateFormated = moment(currentDate).startOf("day").valueOf();
         if (!selectedDoctor || _.isEmpty(selectedDoctor)) {
             toast.error(<FormattedMessage id="manage-schedule.error-selected-doctor" />, {
                 position: "top-center",
@@ -97,11 +97,23 @@ function ManageSchedule(props) {
                     obj.typeDate = itemSelected.keyMap
                     result.push(obj)
                 })
-                await createBulkScheduleAPI({
+
+                const res = await createBulkScheduleAPI({
                     arrSchedule: result,
                     doctorId: selectedDoctor.value,
                     date: dateFormated
                 })
+                if (res && res.errCode === 0)
+                    toast.success(<FormattedMessage id="manage-schedule.create-success" />, {
+                        theme: "colored"
+                    })
+                else
+                    toast.error(<FormattedMessage id="manage-schedule.error-create-fail" />, {
+                        position: "top-center",
+                        theme: "colored"
+                    })
+
+
             }
             else {
                 toast.error(<FormattedMessage id="manage-schedule.error-selected-time" />, {
@@ -144,7 +156,7 @@ function ManageSchedule(props) {
                             onChange={handleOnChangeDatePicker}
                             className="form-control"
                             value={currentDate}
-                            minDate={new Date()}
+                            minDate={new Date(new Date().setDate(new Date().getDate() - 1))} // tru 1 day de lay day hien tai
                         />
                     </div>
                     <div className="col-12 choose-hour-container">
