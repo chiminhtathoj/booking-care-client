@@ -84,5 +84,39 @@
         "error-selected-date": "Vui lòng chọn ngày",
         "error-create-fail": "Thêm lịch trình thất bại!",
         "create-success": "Thêm lịch trình thành công!"
+    },
+    "patient": {
+        "detail-doctor": {
+            "schedule": "Lịch khám",
+            "non-schedule": "Bác sĩ không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác.",
+            "choose": "Chọn ",
+            "book-free": " và đặt (miễn phí)"
+        }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Thông tin bác sĩ",
+            "select-doctor": "Chọn bác sĩ",
+            "intro": "Thông tin giới thiệu",
+            "add": "Tạo thông tin",
+            "save": "Lưu thông tin",
+            "price": "Giá khám bệnh",
+            "payment": "Phương thức thanh toán",
+            "province": "Tỉnh thành",
+            "name-clinic": "Tên phòng khám",
+            "address-clinic": "Địa chỉ phòng khám",
+            "note": "Ghi chú",
+            "error": {
+                "contentHTML": "Vui lòng nhập nội dung HTML",
+                "contentMarkdown": "Vui lòng nhập nội dung Markdown",
+                "description": "Vui lòng nhập giới thiệu bác sĩ",
+                "selectedDoctor": "Vui lòng chọn bác sĩ",
+                "selectedPrice": "Vui lòng chọn giá khám bệnh",
+                "selectedPayment": "Vui lòng chọn phương thức thanh toán",
+                "selectedProvince": "Vui lòng chọn tỉnh",
+                "nameClinic": "Vui lòng nhập tên phòng khám",
+                "addressClinic": "Vui lòng nhập địa chỉ phòng khám"
+            }
+        }
     }
 }

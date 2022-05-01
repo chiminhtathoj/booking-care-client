@@ -50,6 +50,9 @@ const actionTypes = Object.freeze({
     //get all time in all code
     FETCH_TIME_SUCCESS: "FETCH_TIME_SUCCESS",
     FETCH_TIME_FAIL: "FETCH_TIME_FAIL",
+    //gete multi detai doctor
+    FETCH_MULTI_DETAIL_DOCTOR_SUCCESS: "FETCH_MULTI_DETAIL_DOCTOR_SUCCESS",
+    FETCH_MULTI_DETAIL_DOCTOR_FAIL: "FETCH_MULTI_DETAIL_DOCTOR_FAIL",
 })
 
 export default actionTypes;

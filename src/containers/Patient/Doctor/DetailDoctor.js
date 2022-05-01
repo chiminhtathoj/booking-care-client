@@ -44,7 +44,6 @@ function DetailDoctor(props) {
                         className="content-left"
                         style={detailDoctor ? { backgroundImage: `url(${detailDoctor.image})` } : {}}
                     >
-
                     </div>
                     <div className="content-right">
                         <div className="up">
@@ -92,7 +91,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeLanguageAppReducer: (language) => dispatch(action.changeLanguageApp(language)),
-
     };
 };
 

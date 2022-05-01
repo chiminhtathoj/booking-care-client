@@ -3,7 +3,8 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     topDoctors: [],
     allDoctors: [],
-    markdownDoctor: null
+    markdownDoctor: "",
+    multiDataDoctors: ""
 }
 
 const doctorReducer = (state = initialState, action) => {
@@ -46,6 +47,19 @@ const doctorReducer = (state = initialState, action) => {
             stateDoctorMarkdownClone.markdownDoctor = null
             return {
                 ...stateDoctorMarkdownClone,
+            }
+        //get multi detail doctor
+        case actionTypes.FETCH_MULTI_DETAIL_DOCTOR_SUCCESS:
+            let stateMultiDetailDoctor = { ...state }
+            stateMultiDetailDoctor.multiDataDoctors = action.dataDetailDoctor
+            return {
+                ...stateMultiDetailDoctor,
+            }
+        case actionTypes.FETCH_MULTI_DETAIL_DOCTOR_FAIL:
+            let stateMultiDetailDoctorClone = { ...state }
+            stateMultiDetailDoctorClone.multiDataDoctors = {}
+            return {
+                ...stateMultiDetailDoctorClone,
             }
         default:
             return state

@@ -12,6 +12,7 @@
         }
     }
     .available-time {
+        min-height: 150px;
         .text-calendar {
             font-weight: 600;
             margin: 10px 0;
@@ -21,20 +22,26 @@
             }
         }
         .time-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            .btn-time {
-                padding: 10px 10px;
-                min-width: 160px;
-                outline: none;
-                border: none;
-                font-weight: 600;
-                color: #444;
-                &:hover {
-                    background-color: #74f1ff;
-                    color: #333;
+            .time-content-btn {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                .btn-time {
+                    padding: 10px 10px;
+                    min-width: 160px;
+                    outline: none;
+                    border: none;
+                    font-weight: 600;
+                    color: #444;
+                    &:hover {
+                        background-color: #74f1ff;
+                        color: #333;
+                    }
                 }
+            }
+            .book-free {
+                color: #888;
+                margin-top: 15px;
             }
         }
     }

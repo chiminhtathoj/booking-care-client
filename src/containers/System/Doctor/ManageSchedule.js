@@ -97,21 +97,22 @@ function ManageSchedule(props) {
                     obj.typeDate = itemSelected.keyMap
                     result.push(obj)
                 })
-                try {
-                    await createBulkScheduleAPI({
-                        arrSchedule: result,
-                        doctorId: selectedDoctor.value,
-                        date: dateFormated
-                    })
+
+                const res = await createBulkScheduleAPI({
+                    arrSchedule: result,
+                    doctorId: selectedDoctor.value,
+                    date: dateFormated
+                })
+                if (res && res.errCode === 0)
                     toast.success(<FormattedMessage id="manage-schedule.create-success" />, {
                         theme: "colored"
                     })
-                } catch (error) {
+                else
                     toast.error(<FormattedMessage id="manage-schedule.error-create-fail" />, {
                         position: "top-center",
                         theme: "colored"
                     })
-                }
+
 
             }
             else {

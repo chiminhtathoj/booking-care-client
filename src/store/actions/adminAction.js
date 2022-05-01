@@ -96,16 +96,22 @@ export const createNewUser = (data) => {
             if (res && res.errCode === 0) {
                 dispatch(createUserSuccess())
                 dispatch(loadAllUser())
-                toast.success("Create a new user success!");
+                toast.success("Create a new user success!", {
+                    theme: "colored"
+                });
             }
             else {
-                toast.error("Create a new user failed!");
+                toast.error("Create a new user failed!", {
+                    theme: "colored"
+                });
 
                 dispatch(createUserFail())
             }
 
         } catch (error) {
-            toast.error("Create a new user failed!");
+            toast.error("Create a new user failed!", {
+                theme: "colored"
+            });
 
             console.log("createNewUser error", error)
         }
@@ -134,7 +140,9 @@ export const loadAllUser = () => {
             }
 
         } catch (error) {
-            toast.error("Load all user fail");
+            toast.error("Load all user fail", {
+                theme: "colored"
+            });
             console.log("loadAllUser error", error)
         }
     }
@@ -158,15 +166,21 @@ export const deleteUser = (userId) => {
             if (res && res.errCode === 0) {
                 dispatch(deleteUserSuccess())
                 dispatch(loadAllUser())
-                toast.success("Delete a user success!");
+                toast.success("Delete a user success!", {
+                    theme: "colored"
+                });
             }
             else {
-                toast.error("Delete a user failed!");
+                toast.error("Delete a user failed!", {
+                    theme: "colored"
+                });
                 dispatch(deleteUserFail())
             }
 
         } catch (error) {
-            toast.error("Delete a user failed!");
+            toast.error("Delete a user failed!", {
+                theme: "colored"
+            });
 
             console.log("deleteUser error", error)
         }
@@ -190,15 +204,21 @@ export const editUser = (userData) => {
             if (res && res.errCode === 0) {
                 dispatch(editUserSuccess())
                 dispatch(loadAllUser())
-                toast.success("Update a user success!");
+                toast.success("Update a user success!", {
+                    theme: "colored"
+                });
             }
             else {
-                toast.error("Update a user failed!");
+                toast.error("Update a user failed!", {
+                    theme: "colored"
+                });
                 dispatch(editUserFail())
             }
 
         } catch (error) {
-            toast.error("Update a user failed!");
+            toast.error("Update a user failed!", {
+                theme: "colored"
+            });
             console.log("Update user error", error)
         }
     }
