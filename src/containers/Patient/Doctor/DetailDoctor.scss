@@ -16,12 +16,16 @@
         }
     }
     .book-doctor {
+        display: flex;
         padding: 0 280px;
+        margin-bottom: 30px;
         .content-left {
+            border-right: 1px solid #eee;
             width: 50%;
         }
         .content-right {
             width: 50%;
+            margin-top: 70px;
         }
     }
     .info-doctor {

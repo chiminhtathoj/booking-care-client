@@ -7,7 +7,7 @@ import { getDetailDoctorByIdAPI } from "../../../services/doctorService"
 import * as action from "../../../store/actions/"
 import { LANGUAGES } from "../../../utils/"
 import DoctorSchedule from './DoctorSchedule';
-
+import DoctorExtraInfo from './DoctorExtraInfo';
 
 function DetailDoctor(props) {
 
@@ -64,7 +64,7 @@ function DetailDoctor(props) {
                         <DoctorSchedule doctorIdFromParent={detailDoctor && detailDoctor.id ? detailDoctor.id : -1} />
                     </div>
                     <div className="content-right">
-
+                        <DoctorExtraInfo doctorIdFromParent={detailDoctor && detailDoctor.id ? detailDoctor.id : -1} />
                     </div>
                 </div>
                 <div className="info-doctor">

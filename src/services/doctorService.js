@@ -39,7 +39,13 @@ const getScheduleDoctorByIdAndDateAPI = (idDoctor, date) => {
         }
     })
 }
-
+const getExtraInfoDoctorById = (id) => {
+    return axios.get("/api/get-extra-info-doctor-by-id", {
+        params: {
+            id
+        }
+    })
+}
 
 
 
@@ -50,5 +56,6 @@ export {
     getDetailDoctorByIdAPI,
     getMarkdownDoctorByIdAPI,
     createBulkScheduleAPI,
-    getScheduleDoctorByIdAndDateAPI
+    getScheduleDoctorByIdAndDateAPI,
+    getExtraInfoDoctorById
 }

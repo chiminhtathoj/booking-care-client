@@ -91,6 +91,13 @@
             "non-schedule": "Bác sĩ không có lịch hẹn trong thời gian này, vui lòng chọn thời gian khác.",
             "choose": "Chọn ",
             "book-free": " và đặt (miễn phí)"
+        },
+        "extra-info-doctor": {
+            "address-clinic": "Địa chỉ phòng khám",
+            "price-exam": "Giá khám",
+            "hide-price": "Ẩn bảng giá",
+            "show-price": "Xem chi tiết",
+            "note-patient": "Người bệnh có thể thanh toán chi phí bằng hình thức: "
         }
     },
     "admin": {
