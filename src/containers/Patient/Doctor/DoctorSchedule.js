@@ -7,6 +7,7 @@ import * as action from "../../../store/actions/"
 import { LANGUAGES } from "../../../utils/"
 import moment from 'moment'
 import 'moment/locale/vi' // dùng để sử dụng tiếng việt
+import BookingModal from './Modal/BookingModal';
 
 
 
@@ -14,6 +15,8 @@ function DoctorSchedule(props) {
 
     const [arrDate, setArrDate] = useState([]) //7 ngay tiep theo
     const [timeAvailable, setTimeAvailable] = useState([])
+    const [isOpenModalBooking, setIsOpenModalBooking] = useState(false)
+    const [dataScheduleDoctor, setDataScheduleDoctor] = useState("")
     useEffect(() => {
         loadArrDate()
     }, [])
@@ -55,62 +58,80 @@ function DoctorSchedule(props) {
             getTimeAvailable(doctorId, date)
         }
     }
+    const handleClickBtnTime = (item) => {
+        console.log(item)
+        setDataScheduleDoctor(item)
+        setIsOpenModalBooking(true)
+    }
+    const handleCloseModal = () => {
+        setIsOpenModalBooking(false)
+    }
     return (
-        <div className="doctor-schedule-container">
-            <div className="all-schedule">
-                <select
-                    name=""
-                    id=""
-                    onChange={(e) => hanldeOnChangeSelect(e)}
-                >
-                    {
-                        arrDate && arrDate.length > 0 &&
-                        arrDate.map((item, i) => {
-                            return (
-                                <option
-                                    value={item.value}
-                                    key={i}
-                                >
-                                    {item.label}
-                                </option>
-                            )
-                        })
-                    }
-                </select>
-            </div>
-            <div className="available-time">
-                <div className="text-calendar">
-                    <i className="fa-solid fa-calendar-days"></i>
-                    <span><FormattedMessage id="patient.detail-doctor.schedule" /></span>
+        <>
+            <div className="doctor-schedule-container">
+                <div className="all-schedule">
+                    <select
+                        name=""
+                        id=""
+                        onChange={(e) => hanldeOnChangeSelect(e)}
+                    >
+                        {
+                            arrDate && arrDate.length > 0 &&
+                            arrDate.map((item, i) => {
+                                return (
+                                    <option
+                                        value={item.value}
+                                        key={i}
+                                    >
+                                        {item.label}
+                                    </option>
+                                )
+                            })
+                        }
+                    </select>
                 </div>
-                <div className="time-content">
-                    {timeAvailable && timeAvailable.length > 0 ?
-                        <>
-                            <div className="time-content-btn">
-                                {timeAvailable.map((item, i) => (
-                                    <button className="btn-time" key={i}>
-                                        {props.language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn}
-                                    </button>
-                                ))}
-                            </div>
-                            <div className="book-free">
-                                <span>
-                                    <FormattedMessage id="patient.detail-doctor.choose" />
-                                    <i className="far fa-hand-point-up"></i>
-                                    <FormattedMessage id="patient.detail-doctor.book-free" />
-                                </span>
-                            </div>
-                        </>
-                        :
-                        <span><FormattedMessage id="patient.detail-doctor.non-schedule" /></span>
+                <div className="available-time">
+                    <div className="text-calendar">
+                        <i className="fa-solid fa-calendar-days"></i>
+                        <span><FormattedMessage id="patient.detail-doctor.schedule" /></span>
+                    </div>
+                    <div className="time-content">
+                        {timeAvailable && timeAvailable.length > 0 ?
+                            <>
+                                <div className="time-content-btn">
+                                    {timeAvailable.map((item, i) => (
+                                        <button
+                                            className="btn-time"
+                                            key={i}
+                                            onClick={() => handleClickBtnTime(item)}
+                                        >
+                                            {props.language === LANGUAGES.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn}
+                                        </button>
+                                    ))}
+                                </div>
+                                <div className="book-free">
+                                    <span>
+                                        <FormattedMessage id="patient.detail-doctor.choose" />
+                                        <i className="far fa-hand-point-up"></i>
+                                        <FormattedMessage id="patient.detail-doctor.book-free" />
+                                    </span>
+                                </div>
+                            </>
+                            :
+                            <span><FormattedMessage id="patient.detail-doctor.non-schedule" /></span>
 
-                    }
-
+                        }
+                    </div>
 
                 </div>
+            </div >
+            <BookingModal
+                isOpenModalBooking={isOpenModalBooking}
+                handleCloseModal={handleCloseModal}
+                dataScheduleDoctor={dataScheduleDoctor}
+            />
+        </>
 
-            </div>
-        </div >
     );
 }
 const mapStateToProps = state => {
