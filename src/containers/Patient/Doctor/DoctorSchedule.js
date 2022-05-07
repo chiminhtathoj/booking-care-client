@@ -59,7 +59,6 @@ function DoctorSchedule(props) {
         }
     }
     const handleClickBtnTime = (item) => {
-        console.log(item)
         setDataScheduleDoctor(item)
         setIsOpenModalBooking(true)
     }

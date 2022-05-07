@@ -75,7 +75,6 @@ function DetailDoctor(props) {
                     }
                 </div>
                 <div className="comment-doctor">
-
                 </div>
             </div>
         </>

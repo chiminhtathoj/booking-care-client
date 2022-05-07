@@ -9,8 +9,6 @@ import 'moment/locale/vi' // dùng để sử dụng tiếng việt
 import NumberFormat from 'react-number-format'; // format tien
 
 
-
-
 function DoctorExtraInfo(props) {
 
     const [isShowExamDetail, setIsShowExamDetail] = useState(false)
