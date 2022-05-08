@@ -35,11 +35,17 @@ const getAllCodeAPI = (type) => {
         }
     })
 }
+
+const postPatientBookingAppointment = (data) => {
+    return axios.post("/api/find-or-create-appointment", data)
+}
+
 export {
     handleLoginAPI,
     getUsersAPI,
     createNewUserAPI,
     deleteUserAPI,
     editUserAPI,
-    getAllCodeAPI
+    getAllCodeAPI,
+    postPatientBookingAppointment
 }
